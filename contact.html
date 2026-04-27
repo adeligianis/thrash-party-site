@@ -104,10 +104,8 @@
             </div>
 
             <div class="bg-zinc-900/30 p-8 border-2 border-zinc-800 shadow-2xl">
-                <form action="https://formspree.io/f/mkokadov" method="POST" class="space-y-6">
+                <form id="contact-form" action="https://formspree.io/f/mkokadov" method="POST" class="space-y-6">
 
-                    <input type="hidden" name="_next" value="https://www.thrashparty.com/thanks.html">
-                    
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Full Name</label>
                         <input type="text" name="name" required class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonBlue text-white transition font-bold italic">
@@ -120,13 +118,22 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Event Date</label>
-                            <input type="date" name="date" class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonBlue text-white transition font-bold italic">
+                            <<div>
+                                <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Event Date</label>
+                                <input 
+                                    type="date" 
+                                    name="date" 
+                                    required 
+                                    class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonBlue text-white transition font-bold italic appearance-none cursor-pointer [color-scheme:dark]"
+                                >
+                            </div>
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Inquiry Type</label>
-                        <select name="type" class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonPink text-white transition font-bold italic appearance-none">
+                        <select name="type" required class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonPink text-white transition font-bold italic appearance-none">
+                            <option value="" disabled selected>Select an event type...</option>
                             <option>Private Event</option>
                             <option>Wedding</option>
                             <option>Corporate Party</option>
@@ -138,7 +145,7 @@
 
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Message</label>
-                        <textarea name="message" rows="4" placeholder="Tell us about your event!" class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonPink text-white transition font-bold italic"></textarea>
+                        <textarea name="message" rows="4" placeholder="Tell us about your event!" required class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonPink text-white transition font-bold italic"></textarea>
                     </div>
 
                     <button type="submit" class="w-full py-5 bg-neonPink text-black font-black italic uppercase text-2xl hover:bg-white transition-all transform hover:-translate-y-1 active:translate-y-0 shadow-[0_0_20px_rgba(255,0,255,0.4)]">
@@ -155,6 +162,28 @@
         <img src="images/square-logo.png" alt="Logo" class="h-16 mx-auto mb-8 opacity-50">
         <p class="text-zinc-600 text-xs font-bold uppercase tracking-widest">&copy; 2026 Thrash Party.</p>
     </footer>
+
+    <script>
+        const form = document.getElementById("contact-form");
+        
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault(); // Stop the page from refreshing
+          const data = new FormData(event.target);
+          
+          const response = await fetch(event.target.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+      
+          if (response.ok) {
+            // It worked! Redirect to your custom thanks page
+            window.location.href = "thanks.html";
+          } else {
+            alert("Oops! There was a problem sending your transmission.");
+          }
+        });
+      </script>
 
 </body>
 </html>
