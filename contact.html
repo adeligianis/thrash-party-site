@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Book Thrash Party | Formal Inquiry</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Matching Custom Neon Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #ff00ff; border-radius: 5px; border: 2px solid #000000; }
+        ::-webkit-scrollbar-thumb:hover { background: #01ffff; }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                neonBlue: '#01ffff',
+                neonPink: '#ff00ff',
+              }
+            }
+          }
+        }
+    </script>
+</head>
+
+<body class="bg-black text-white">
+
+    <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
+        <div class="flex justify-between items-center px-6 py-4">
+            <a href="index.html" class="block">
+                <img src="images/square-logo.png" alt="Thrash Party Logo" class="h-10 w-auto">
+            </a>
+    
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest items-center">
+                <a href="index.html" class="hover:text-neonBlue transition">Home</a>
+                <a href="index.html#gigs" class="hover:text-neonPink transition">Gigs</a>
+                <a href="songs.html" class="hover:text-neonPink transition">Songs</a>
+                <a href="media.html" class="hover:text-neonPink transition">Media</a>
+                <a href="contact.html" class="text-neonPink border border-neonPink px-4 py-2">Book Us</a>
+            </div>
+    
+            <button id="menu-btn" class="md:hidden text-neonBlue">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+    
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-zinc-900 px-6 py-8 space-y-6 flex flex-col items-center text-center">
+            <a href="index.html" class="text-2xl font-black italic uppercase text-neonBlue">Home</a>
+            <a href="index.html#gigs" class="text-2xl font-black italic uppercase hover:text-neonPink">Gigs</a>
+            <a href="songs.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Songs</a>
+            <a href="media.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Media</a>
+            <a href="contact.html" class="text-2xl font-black italic uppercase text-neonPink border-2 border-neonPink px-8 py-3 w-full">Book Us</a>
+        </div>
+    </nav>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close menu when a link is clicked
+        const navLinks = mobileMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+
+    <main class="max-w-6xl mx-auto px-6 py-20">
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+            
+            <div>
+                <h1 class="text-6xl font-black italic uppercase tracking-tighter mb-6">
+                    Book the <span class="text-neonBlue">PARTY!</span>
+                </h1>
+                <p class="text-zinc-400 text-xl mb-10 leading-relaxed">
+                    Weddings, high-octane club dates, even corporate events (we party semi-formally too!) —if you want the music at 11 and the dance floor packed, you’re in the right place!
+                </p>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="font-black italic uppercase text-neonPink tracking-wider mb-1">Direct Contact</h3>
+                        <a href="mailto:thrashpartyband@gmail.com" class="text-2xl hover:text-neonBlue transition">thrashpartyband@gmail.com</a>
+                    </div>
+                    <div>
+                        <h3 class="font-black italic uppercase text-neonBlue tracking-wider mb-1">Based In</h3>
+                        <p class="text-2xl">New England / Everywhere</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-zinc-900/30 p-8 border-2 border-zinc-800 shadow-2xl">
+                <form action="https://formspree.io/f/mkokadov" method="POST" class="space-y-6">
+
+                    <input type="hidden" name="_next" value="https://www.thrashparty.com/thanks.html">
+                    
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Full Name</label>
+                        <input type="text" name="name" required class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonBlue text-white transition font-bold italic">
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Email Address</label>
+                            <input type="email" name="email" required class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonBlue text-white transition font-bold italic">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Event Date</label>
+                            <input type="date" name="date" class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonBlue text-white transition font-bold italic">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Inquiry Type</label>
+                        <select name="type" class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonPink text-white transition font-bold italic appearance-none">
+                            <option>Private Event</option>
+                            <option>Wedding</option>
+                            <option>Corporate Party</option>
+                            <option>Bar / Music Venue</option>
+                            <option>Festival</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Message</label>
+                        <textarea name="message" rows="4" placeholder="Tell us about your event!" class="w-full bg-black border-2 border-zinc-800 p-4 focus:outline-none focus:border-neonPink text-white transition font-bold italic"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-5 bg-neonPink text-black font-black italic uppercase text-2xl hover:bg-white transition-all transform hover:-translate-y-1 active:translate-y-0 shadow-[0_0_20px_rgba(255,0,255,0.4)]">
+                        Send Transmission
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-16 border-t border-zinc-900 text-center bg-black">
+        <img src="images/square-logo.png" alt="Logo" class="h-16 mx-auto mb-8 opacity-50">
+        <p class="text-zinc-600 text-xs font-bold uppercase tracking-widest">&copy; 2026 Thrash Party.</p>
+    </footer>
+
+</body>
+</html>

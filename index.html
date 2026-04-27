@@ -69,7 +69,7 @@
                 <a href="index.html#gigs" class="hover:text-neonPink transition">Gigs</a>
                 <a href="songs.html" class="hover:text-neonPink transition">Songs</a>
                 <a href="media.html" class="hover:text-neonPink transition">Media</a>
-                <a href="mailto:thrashpartyband@gmail.com" class="hover:text-neonPink transition border border-neonPink px-4 py-2">Book Us</a>
+                <a href="contact.html" class="hover:text-neonPink transition border border-neonPink px-4 py-2">Book Us</a>
                 
                 <div class="flex space-x-4 border-l border-zinc-800 pl-8 text-zinc-400">
                     <a href="https://instagram.com/thrashpartyband" target="_blank" class="hover:text-neonPink transition">
@@ -94,7 +94,7 @@
             <a href="index.html#gigs" class="text-2xl font-black italic uppercase hover:text-neonPink">Gigs</a>
             <a href="songs.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Songs</a>
             <a href="media.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Media</a>
-            <a href="mailto:thrashpartyband@gmail.com" class="text-2xl font-black italic uppercase text-neonPink border-2 border-neonPink px-8 py-3 w-full">Book Us</a>
+            <a href="contact.html" class="text-2xl font-black italic uppercase text-neonPink border-2 border-neonPink px-8 py-3 w-full">Book Us</a>
             
             <div class="flex space-x-8 pt-6 text-zinc-400">
                 <a href="https://instagram.com/thrashpartyband" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
@@ -219,8 +219,21 @@
     <script>
         // 1. Mobile Menu Toggle
         const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Toggle menu open/close
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // NEW: Close menu when any link inside it is clicked
+    const navLinks = mobileMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+
 
         // 2. HARD-CODED GIG LIST
         // Edit this array to add/remove shows instantly
@@ -276,6 +289,7 @@
                 `;
             });
         }
+
     </script>
 </body>
 </html>

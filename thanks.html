@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Received | Thrash Party</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                neonBlue: '#01ffff',
+                neonPink: '#ff00ff',
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Matching Custom Neon Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #ff00ff; border-radius: 5px; border: 2px solid #000000; }
+        ::-webkit-scrollbar-thumb:hover { background: #01ffff; }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen flex flex-col">
+
+    <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
+        <div class="flex justify-between items-center px-6 py-4">
+            <a href="index.html" class="block">
+                <img src="images/square-logo.png" alt="Thrash Party Logo" class="h-10 w-auto">
+            </a>
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest items-center">
+                <a href="index.html" class="hover:text-neonBlue transition">Home</a>
+                <a href="index.html#gigs" class="hover:text-neonPink transition">Gigs</a>
+                <a href="songs.html" class="hover:text-neonPink transition">Songs</a>
+                <a href="media.html" class="hover:text-neonPink transition">Media</a>
+                <a href="contact.html" class="hover:text-neonPink transition border border-neonPink px-4 py-2">Book Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex flex-col items-center justify-center text-center px-6 py-20">
+        <h1 class="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-6 text-neonPink drop-shadow-[0_0_15px_rgba(255,0,255,0.6)]">
+            Transmission <span class="text-white">Received</span>
+        </h1>
+        <p class="text-xl md:text-2xl font-bold uppercase tracking-widest text-neonBlue mb-12">
+            We'll get back to you before the next beat drops.
+        </p>
+        
+        <div class="flex flex-col md:flex-row gap-6">
+            <a href="index.html" class="px-8 py-4 bg-white text-black font-black italic uppercase text-xl hover:bg-neonBlue transition transform hover:-translate-y-1">
+                Back to Base
+            </a>
+            <a href="media.html" class="px-8 py-4 border-2 border-neonPink text-neonPink font-black italic uppercase text-xl hover:bg-neonPink hover:text-black transition transform hover:-translate-y-1">
+                See the Chaos
+            </a>
+        </div>
+    </main>
+
+    <footer class="py-12 border-t border-zinc-900 text-center bg-black">
+        <p class="text-zinc-600 text-xs font-bold uppercase tracking-widest">&copy; 2026 Thrash Party.</p>
+    </footer>
+
+</body>
+</html>
