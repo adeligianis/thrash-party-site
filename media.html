@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Media | Thrash Party</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <script>
+        tailwind.config = {
+          theme: { extend: { colors: { neonBlue: '#01ffff', neonPink: '#ff00ff' } } }
+        }
+    </script>
+</head>
+<body class="bg-black text-white">
+
+    <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
+        <div class="flex justify-between items-center px-6 py-4">
+            <a href="index.html" class="block">
+                <img src="images/square-logo.png" alt="Thrash Party Logo" class="h-10 w-auto">
+            </a>
+    
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest items-center">
+                <a href="index.html" class="text-neonBlue">Home</a>
+                <a href="index.html#gigs">Gigs</a>
+                <a href="songs.html" class="hover:text-neonPink transition">Songs</a>
+                <a href="media.html" class="hover:text-neonPink transition">Media</a>
+                <a href="mailto:thrashpartyband@gmail.com" class="hover:text-neonPink transition border border-neonPink px-4 py-2">Book Us</a>
+                
+                <div class="flex space-x-4 border-l border-zinc-800 pl-8 text-zinc-400">
+                    <a href="https://instagram.com/thrashpartyband" target="_blank" class="hover:text-neonPink transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61554896431382" target="_blank" class="hover:text-neonBlue transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="mailto:thrashpartyband@gmail.com" class="hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                </div>
+            </div>
+    
+            <button id="menu-btn" class="md:hidden text-neonBlue">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+    
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-zinc-900 px-6 py-8 space-y-6 flex flex-col items-center text-center">
+            <a href="index.html" class="text-2xl font-black italic uppercase text-neonBlue">Home</a>
+            <a href="index.html#gigs" class="text-2xl font-black italic uppercase hover:text-neonPink">Gigs</a>
+            <a href="songs.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Songs</a>
+            <a href="media.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Media</a>
+            <a href="mailto:thrashpartyband@gmail.com" class="text-2xl font-black italic uppercase text-neonPink border-2 border-neonPink px-8 py-3 w-full">Book Us</a>
+            
+            <div class="flex space-x-8 pt-6 text-zinc-400">
+                <a href="https://instagram.com/thrashpartyband" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                <a href="https://www.facebook.com/profile.php?id=61554896431382" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="mailto:thrashpartyband@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- <header class="relative h-[70vh] flex items-center justify-center overflow-hidden bg-black">
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-60">
+            <iframe 
+                class="w-full h-full object-cover scale-150" 
+                src="https://www.youtube.com/embed/4JGvHpwoso4?autoplay=1&mute=1&controls=0&loop=1&playlist=4JGvHpwoso4&start=10&end=55&rel=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media">
+            </iframe>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80 z-10 pointer-events-none"></div>
+    
+        <div class="relative z-20 text-center px-4">
+            <img src="images/logo.png" alt="Thrash Party" class="mx-auto mb-6 h-40 md:h-60 drop-shadow-[0_0_20px_rgba(1,255,255,0.8)]">
+            <h1 class="text-4xl md:text-6xl font-black italic tracking-tighter mb-4 drop-shadow-[0_0_15px_rgba(255,0,255,0.8)]">
+                <span class="text-white">ALL ERAS </span><span class="text-neonPink">ONE PARTY!</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-bold uppercase tracking-widest text-neonBlue drop-shadow-[0_0_10px_rgba(1,255,255,0.5)]">
+                New England's "Everything to 11" Party Band
+            </p>
+        </div>
+    </header> -->
+    
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+    
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <section class="max-w-6xl mx-auto py-20 px-6">
+        <h1 class="text-5xl font-black italic uppercase mb-12 tracking-tighter">The <span class="text-neonPink">Gallery</span></h1>
+
+        <div id="photo-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+    <script>
+        const grid = document.getElementById('photo-grid');
+        const totalPhotos = 110; 
+    
+        for (let i = 1; i <= totalPhotos; i++) {
+            const fileName = `gig-photo${i}.jpeg`;
+            
+            const photoHTML = `
+                <a href="images/${fileName}" class="glightbox group relative block overflow-hidden border-2 border-zinc-800 hover:border-neonPink transition shadow-lg">
+                    <img src="images/${fileName}" alt="Thrash Party Live Shot ${i}" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <span class="text-neonPink font-black uppercase italic text-xl shadow-black">View Photo</span>
+                    </div>
+                </a>
+            `;
+            grid.innerHTML += photoHTML;
+        }
+    
+        // 3. Initialize Lightbox ONCE after everything is built
+        const lightbox = GLightbox({ 
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true
+        });
+    </script>
+</body>
+</html>

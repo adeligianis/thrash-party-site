@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Thrash Party | Official Site</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                neonBlue: '#01ffff',
+                neonPink: '#ff00ff',
+              }
+            }
+          }
+        }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+
+<body class="bg-black text-white">
+
+    <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
+        <div class="flex justify-between items-center px-6 py-4">
+            <a href="index.html" class="block">
+                <img src="images/square-logo.png" alt="Thrash Party Logo" class="h-10 w-auto">
+            </a>
+    
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest items-center">
+                <a href="index.html" class="text-neonBlue">Home</a>
+                <a href="index.html#gigs" class="hover:text-neonPink transition">Gigs</a>
+                <a href="songs.html" class="hover:text-neonPink transition">Songs</a>
+                <a href="media.html" class="hover:text-neonPink transition">Media</a>
+                <a href="mailto:thrashpartyband@gmail.com" class="hover:text-neonPink transition border border-neonPink px-4 py-2">Book Us</a>
+                
+                <div class="flex space-x-4 border-l border-zinc-800 pl-8 text-zinc-400">
+                    <a href="https://instagram.com/thrashpartyband" target="_blank" class="hover:text-neonPink transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61554896431382" target="_blank" class="hover:text-neonBlue transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="mailto:thrashpartyband@gmail.com" class="hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                </div>
+            </div>
+    
+            <button id="menu-btn" class="md:hidden text-neonBlue">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+    
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-zinc-900 px-6 py-8 space-y-6 flex flex-col items-center text-center">
+            <a href="index.html" class="text-2xl font-black italic uppercase text-neonBlue">Home</a>
+            <a href="index.html#gigs" class="text-2xl font-black italic uppercase hover:text-neonPink">Gigs</a>
+            <a href="songs.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Songs</a>
+            <a href="media.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Media</a>
+            <a href="mailto:thrashpartyband@gmail.com" class="text-2xl font-black italic uppercase text-neonPink border-2 border-neonPink px-8 py-3 w-full">Book Us</a>
+            
+            <div class="flex space-x-8 pt-6 text-zinc-400">
+                <a href="https://instagram.com/thrashpartyband" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                <a href="https://www.facebook.com/profile.php?id=61554896431382" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="mailto:thrashpartyband@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+            </div>
+        </div>
+    </nav>
+    
+    <header class="relative h-[70vh] flex items-center justify-center overflow-hidden bg-black">
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-60">
+            <iframe 
+                class="w-full h-full object-cover scale-150" 
+                src="https://www.youtube.com/embed/4JGvHpwoso4?autoplay=1&mute=1&controls=0&loop=1&playlist=4JGvHpwoso4&start=10&end=55&rel=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media">
+            </iframe>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80 z-10 pointer-events-none"></div>
+    
+        <div class="relative z-20 text-center px-4">
+            <img src="images/logo.png" alt="Thrash Party" class="mx-auto mb-6 h-40 md:h-60 drop-shadow-[0_0_20px_rgba(1,255,255,0.8)]">
+            <h1 class="text-4xl md:text-6xl font-black italic tracking-tighter mb-4 drop-shadow-[0_0_15px_rgba(255,0,255,0.8)]">
+                <span class="text-white">ALL ERAS </span><span class="text-neonPink">ONE PARTY!</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-bold uppercase tracking-widest text-neonBlue drop-shadow-[0_0_10px_rgba(1,255,255,0.5)]">
+                New England's "Everything to 11" Party Band
+            </p>
+        </div>
+    </header>
+
+    <section class="bg-black pt-8 pb-16 px-6">
+        <div class="max-w-4xl mx-auto border-4 border-neonBlue shadow-[0_0_20px_rgba(1,255,255,0.3)]">
+            <div class="relative pb-[56.25%] h-0 overflow-hidden">
+                <iframe 
+                    class="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/4JGvHpwoso4" 
+                    title="Thrash Party Live" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <<section class="py-24 px-6 max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+        <div class="relative">
+            <h2 class="text-4xl font-black italic uppercase mb-6 tracking-tighter text-white">
+                Certified Classics <span class="text-neonBlue">Maximum Volume</span>
+            </h2>
+            
+            <p class="text-[#ff00ff] leading-relaxed mb-4 text-lg font-bold">
+                Thrash Party is the high-energy antidote to the standard event band.
+            </p>
+    
+            <p class="text-zinc-400 leading-relaxed mb-4 text-lg">
+                We specialize in the anthems that defined a generation, delivering a relentless setlist of pop favorites, rock classics, and millennial throwbacks with a sharp, modern edge.
+            </p>
+            
+            <p class="text-zinc-400 leading-relaxed text-lg mb-10">
+                From the tracks you grew up on to the modern hits that keep the floor moving, we bridge the gap between Millennial nostalgia and Gen-Z intensity. No slow dances, no clichés — just a loud, high-octane celebration of the songs you actually love.
+            </p>
+    
+            <div class="inline-block border-4 border-zinc-800 p-1 transform -rotate-3 bg-zinc-900 w-48 shadow-xl -ml-4 md:-ml-8">
+                <img src="images/gig-photo67.jpeg" alt="Thrash Party Detail">
+            </div>
+        </div>
+    
+        <div class="relative h-[400px] md:h-[500px] flex items-center justify-center">
+            
+            <div class="absolute z-10 border-4 border-zinc-800 p-2 transform rotate-2 bg-zinc-900 w-4/5 shadow-2xl">
+                <img src="images/gig-photo29.jpeg" alt="Thrash Party Live">
+            </div>
+    
+            <div class="absolute z-20 -bottom-4 -right-4 border-4 border-zinc-800 p-1 transform -rotate-6 bg-zinc-900 w-1/2 shadow-2xl">
+                <img src="images/gig-photo14.jpeg" alt="Thrash Party Crowd">
+            </div>
+    
+        </div>
+    </section>
+
+    <section id="gigs" class="py-24 bg-zinc-900/30 border-t border-zinc-800">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter mb-2">
+                See Us <span class="text-neonPink">Live</span>
+            </h2>
+            
+            <p class="text-neonBlue font-bold uppercase tracking-widest text-sm mb-12 italic">
+                High energy. All anthems.
+            </p>
+    
+            <div id="gig-container" class="space-y-4 text-left">
+                </div>
+    
+        </div>
+    </section>
+
+    <section class="py-24 px-6 max-w-6xl mx-auto">
+        <h2 class="text-4xl font-black italic uppercase mb-12 tracking-tighter">On <span class="text-neonBlue">The 'Gram</span></h2>
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="elfsight-app-1c98a02b-b975-4258-bd96-6072b4b94cf8" data-elfsight-app-lazy></div>
+    </section>
+
+    <footer class="py-16 border-t border-zinc-900 text-center bg-black">
+        <img src="images/square-logo.png" alt="Logo" class="h-16 mx-auto mb-8 opacity-50">
+        <div class="flex justify-center space-x-6 mb-8 text-zinc-500">
+            <a href="https://instagram.com/thrashparty" class="hover:text-neonPink transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+            </a>
+            <a href="https://facebook.com/thrashparty" class="hover:text-neonBlue transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="mailto:thrashpartyband@gmail.com" class="hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </a>
+        </div>
+        <p class="text-zinc-600 text-xs font-bold uppercase tracking-widest">&copy; 2026 Thrash Party.</p>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+        // 2. HARD-CODED GIG LIST
+        // Edit this array to add/remove shows instantly
+        const gigs = [
+            {
+                date: "Saturday, May 2, 2026",
+                venue: "Thirsty Moose",
+                location: "Portsmouth, NH",
+                link: "https://www.thirstymoosetaphouse.com/"
+            },
+            {
+                date: "Friday, May 8, 2026",
+                venue: "Splitsville",
+                location: "Foxboro, MA",
+                link: "https://www.howlsplitsville.com/"
+            },
+            {
+                date: "Saturday, June 6, 2026",
+                venue: "The Goat",
+                location: "Manchester, NH",
+                link: "https://goatbarnation.com/manchester/"
+            },
+            {
+                date: "Saturday, June 13, 2026",
+                venue: "Wally's",
+                location: "Hampton Beach, NH",
+                link: "https://wallysnh.com/"
+            }
+        ];
+
+        const DEFAULT_EMAIL = 'mailto:thrashpartyband@gmail.com';
+        const container = document.getElementById('gig-container');
+
+        if (gigs.length === 0) {
+            container.innerHTML = '<p class="text-zinc-500 italic text-center w-full">No upcoming dates... Book us now!</p>';
+        } else {
+            gigs.forEach(gig => {
+                const isTicketLink = gig.link && gig.link.includes('http');
+                const finalLink = isTicketLink ? gig.link : DEFAULT_EMAIL;
+                const buttonText = isTicketLink ? 'Venue Info' : 'Details';
+
+                container.innerHTML += `
+                    <div class="flex flex-col md:flex-row justify-between items-center p-6 border border-zinc-800 bg-black hover:border-neonBlue transition group">
+                        <div class="mb-4 md:mb-0 text-center md:text-left">
+                            <span class="text-neonBlue font-bold block italic uppercase text-sm">${gig.date}</span>
+                            <span class="text-2xl font-black uppercase italic group-hover:text-white transition">${gig.venue}</span>
+                        </div>
+                        <div class="text-zinc-500 font-bold uppercase tracking-widest">${gig.location}</div>
+                        <a href="${finalLink}" target="_blank" class="mt-4 md:mt-0 px-6 py-2 border-2 border-neonBlue text-neonBlue font-black italic uppercase hover:bg-neonBlue hover:text-black transition">
+                            ${buttonText}
+                        </a>
+                    </div>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>

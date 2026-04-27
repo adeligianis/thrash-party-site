@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Song List | Thrash Party</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: { extend: { colors: { neonBlue: '#01ffff', neonPink: '#ff00ff' } } }
+        }
+    </script>
+</head>
+<body class="bg-black text-white">
+
+    <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
+        <div class="flex justify-between items-center px-6 py-4">
+            <a href="index.html" class="block">
+                <img src="images/square-logo.png" alt="Thrash Party Logo" class="h-10 w-auto">
+            </a>
+    
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest items-center">
+                <a href="index.html" class="text-neonBlue">Home</a>
+                <a href="index.html#gigs">Gigs</a>
+                <a href="songs.html" class="hover:text-neonPink transition">Songs</a>
+                <a href="media.html" class="hover:text-neonPink transition">Media</a>
+                <a href="mailto:thrashpartyband@gmail.com" class="hover:text-neonPink transition border border-neonPink px-4 py-2">Book Us</a>
+                
+                <div class="flex space-x-4 border-l border-zinc-800 pl-8 text-zinc-400">
+                    <a href="https://instagram.com/thrashpartyband" target="_blank" class="hover:text-neonPink transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61554896431382" target="_blank" class="hover:text-neonBlue transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="mailto:thrashpartyband@gmail.com" class="hover:text-white transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    </a>
+                </div>
+            </div>
+    
+            <button id="menu-btn" class="md:hidden text-neonBlue">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+    
+      <!-- mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-zinc-900 px-6 py-8 space-y-6 flex flex-col items-center text-center">
+            <a href="index.html" class="text-2xl font-black italic uppercase text-neonBlue">Home</a>
+            <a href="index.html#gigs" class="text-2xl font-black italic uppercase hover:text-neonPink">Gigs</a>
+            <a href="songs.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Songs</a>
+            <a href="media.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Media</a>
+            <a href="mailto:thrashpartyband@gmail.com" class="text-2xl font-black italic uppercase text-neonPink border-2 border-neonPink px-8 py-3 w-full">Book Us</a>
+            
+            <div class="flex space-x-8 pt-6 text-zinc-400">
+                <a href="https://instagram.com/thrashpartyband" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                <a href="https://www.facebook.com/profile.php?id=61554896431382" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                <a href="mailto:thrashpartyband@gmail.com"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a>
+            </div>
+        </div>
+    </nav>
+    
+   <!-- <header class="relative h-[70vh] flex items-center justify-center overflow-hidden bg-black">
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-60">
+            <iframe 
+                class="w-full h-full object-cover scale-150" 
+                src="https://www.youtube.com/embed/4JGvHpwoso4?autoplay=1&mute=1&controls=0&loop=1&playlist=4JGvHpwoso4&start=10&end=55&rel=0" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media">
+            </iframe>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80 z-10 pointer-events-none"></div>
+    
+        <div class="relative z-20 text-center px-4">
+            <img src="images/logo.png" alt="Thrash Party" class="mx-auto mb-6 h-40 md:h-60 drop-shadow-[0_0_20px_rgba(1,255,255,0.8)]">
+            <h1 class="text-4xl md:text-6xl font-black italic tracking-tighter mb-4 drop-shadow-[0_0_15px_rgba(255,0,255,0.8)]">
+                <span class="text-white">ALL ERAS </span><span class="text-neonPink">ONE PARTY!</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-bold uppercase tracking-widest text-neonBlue drop-shadow-[0_0_10px_rgba(1,255,255,0.5)]">
+                New England's "Everything to 11" Party Band
+            </p>
+        </div>
+    </header> -->
+    
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+    
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
+    <section class="max-w-4xl mx-auto py-20 px-6">
+        <h1 class="text-5xl md:text-7xl font-black italic uppercase mb-4 tracking-tighter">The <span class="text-neonBlue">Hit List</span></h1>
+        <p class="text-zinc-400 uppercase tracking-widest font-bold mb-12">All the Bangers We Play Live</p>
+
+        <input type="text" id="songSearch" placeholder="Search for an artist or song..." 
+               class="w-full bg-zinc-900 border-2 border-zinc-700 p-4 mb-8 focus:border-neonBlue outline-none transition text-xl italic font-bold">
+
+        <div id="song-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            </div>
+    </section>
+
+    <script>
+        // 1. Your Song List
+        const songs = [
+            { title: "Whats Up", artist: "4 Non Blondes" },
+            { title: "Dirty Little Secret", artist: "The All-American Rejects" },
+            { title: "Move Along", artist: "The All-American Rejects" },
+            { title: "Party Hard", artist: "Andrew W.K." },
+            { title: "Fight for Your Right", artist: "Beastie Boys" },
+            { title: "Beer Never Broke My Heart", artist: "Luke Combs" },
+            { title: "Save a Horse (Ride a Cowboy)", artist: "Big & Rich" },
+            { title: "Rebel Yell", artist: "Billy Idol" },
+            { title: "All The Small Things", artist: "Blink-182" },
+            { title: "What's My Age Again", artist: "Blink-182" },
+            { title: "Song 2", artist: "Blur" },
+            { title: "Livin on a Prayer", artist: "Bon Jovi" },
+            { title: "1985", artist: "Bowling For Soup" },
+            { title: "Summer of 69", artist: "Bryan Adams" },
+            { title: "HOT 2 GO", artist: "Chappell Roan" },
+            { title: "Pink Pony Club", artist: "Chappell Roan" },
+            { title: "Tennessee Whiskey", artist: "Chris Stapleton" },
+            { title: "Zombie", artist: "The Cranberries" },
+            { title: "Higher", artist: "Creed" },
+            { title: "Sugar We're Goin Down", artist: "Fall Out Boy" },
+            { title: "Stacy's Mom", artist: "Fountains of Wayne" },
+            { title: "Friends in Low Places", artist: "Garth Brooks" },
+            { title: "Anthem", artist: "Good Charlotte" },
+            { title: "Lifestyles of the Rich and Famous", artist: "Good Charlotte" },
+            { title: "Basket Case", artist: "Green Day" },
+            { title: "Good Riddance (Time of your Life)", artist: "Green Day" },
+            { title: "When I Come Around", artist: "Green Day" },
+            { title: "Are You Gonna Be My Girl?", artist: "Jet" },
+            { title: "Sweetness", artist: "Jimmy Eat World" },
+            { title: "The Middle", artist: "Jimmy Eat World" },
+            { title: "Country Roads", artist: "John Denver" },
+            { title: "Don't Stop Believing", artist: "Journey" },
+            { title: "Since U Been Gone", artist: "Kelly Clarkson" },
+            { title: "Sex on Fire", artist: "Kings of Leon" },
+            { title: "In The End", artist: "Linkin Park" },
+            { title: "My Own Worst Enemy", artist: "Lit" },
+            { title: "Country Girl (Shake It For Me)", artist: "Luke Bryan" },
+            { title: "Unwritten", artist: "Natasha Bedingfield" },
+            { title: "Sweet Caroline", artist: "Neil Diamond" },
+            { title: "Stick Season", artist: "Noah Kahan" },
+            { title: "Crazy Train", artist: "Ozzy Osbourne" },
+            { title: "I Write Sins, Not Tragedies", artist: "Panic! At The Disco" },
+            { title: "Still Into You", artist: "Paramore" },
+            { title: "I Had Some Help", artist: "Post Malone ft. Morgan Wallen" },
+            { title: "Jessie's Girl", artist: "Rick Springfield" },
+            { title: "All Night Longer", artist: "Sammy Adams" },
+            { title: "Stitches", artist: "Shawn Mendes" },
+            { title: "Superstition", artist: "Stevie Wonder" },
+            { title: "Santeria", artist: "Sublime" },
+            { title: "Take Me Out", artist: "Franz Ferdinand" },
+            { title: "What I Got", artist: "Sublime" },
+            { title: "Fat Lip", artist: "Sum 41" },
+            { title: "Love Story", artist: "Taylor Swift" },
+            { title: "Style", artist: "Taylor Swift" },
+            { title: "Lose Control", artist: "Teddy Swims" },
+            { title: "I Believe in a Thing Called Love", artist: "The Darkness" },
+            { title: "Shipping Up To Boston", artist: "Dropkick Murphys" },
+            { title: "Mr. Brightside", artist: "The Killers" },
+            { title: "Somebody Told Me", artist: "The Killers" },
+            { title: "500 Miles", artist: "The Proclaimers" },
+            { title: "Semi-Charmed Life", artist: "Third Eye Blind" },
+            { title: "American Girl", artist: "Tom Petty" },
+            { title: "Shut Up & Dance", artist: "Walk The Moon" },
+            { title: "Check Yes Juliet", artist: "We The Kings" },
+            { title: "Teenage Dirtbag", artist: "Wheatus" },
+            { title: "7 Nation Army", artist: "The White Stripes" },
+            { title: "Ocean Ave", artist: "Yellowcard" },
+            { title: "Chicken Fried", artist: "Zac Brown Band" },
+            { title: "Creep", artist: "Radiohead" },
+            { title: "Last Friday Night (TGIF)", artist: "Katy Perry" },
+            { title: "The Great Escape", artist: "Boys Like Girls" },
+            { title: "Revival", artist: "Zach Bryan" },
+            { title: "Just The Way You Are", artist: "Bruno Mars" },
+            { title: "Ride", artist: "Twenty One Pilots" },
+            { title: "Everybody Talks", artist: "Neon Trees" },
+            { title: "Break Stuff", artist: "Limp Bizkit" },
+            { title: "Iris", artist: "Goo Goo Dolls" }
+        ];
+    
+        // 2. THE AUTOMATIC SORTING LOGIC
+        // This sorts the array by title (A-Z) before it ever hits the screen
+        songs.sort((a, b) => a.title.localeCompare(b.title));
+    
+        const list = document.getElementById('song-list');
+        const search = document.getElementById('songSearch');
+    
+        function displaySongs(filter = '') {
+            list.innerHTML = '';
+            const filtered = songs.filter(s => 
+                s.title.toLowerCase().includes(filter.toLowerCase()) || 
+                s.artist.toLowerCase().includes(filter.toLowerCase())
+            );
+    
+            filtered.forEach(s => {
+                list.innerHTML += `
+                    <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition">
+                        <div>
+                            <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">${s.title}</div>
+                            <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">${s.artist}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    
+        search.addEventListener('input', (e) => displaySongs(e.target.value));
+        displaySongs();
+    </script>
+</body>
+</html>
