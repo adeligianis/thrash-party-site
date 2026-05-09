@@ -92,35 +92,80 @@
         });
     </script>
 
+    <!-- Video Gallery. Remove Comments to insert
+<section class="max-w-6xl mx-auto py-20 px-6">
+        <h1 class="text-5xl font-black italic uppercase mb-12 tracking-tighter">The <span class="text-neonPink">Videos</span></h1>
+
+        <div id="video-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <a href="https://www.youtube.com/watch?v=4JGvHpwoso4" class="glightbox group relative block overflow-hidden border-2 border-zinc-800 hover:border-neonPink transition shadow-xl" style="background: rgba(39, 39, 46, 0.8); border-radius: 1.5rem; max-width: 36rem; margin: 0 auto;">
+                <div class="relative aspect-video bg-black">
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/4JGvHpwoso4" title="Thrash Party Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <span class="text-neonPink font-black uppercase italic text-xl shadow-black">Watch Video</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h2 class="text-xl font-bold uppercase tracking-wider">Promo from Royale Boston</h2>
+                </div>
+            </a>
+            <a href="https://www.youtube.com/watch?v=VIDEO_ID_2" class="glightbox group relative block overflow-hidden border-2 border-zinc-800 hover:border-neonPink transition shadow-xl" style="background: rgba(39, 39, 46, 0.8); border-radius: 1.5rem; max-width: 36rem; margin: 0 auto;">
+                <div class="relative aspect-video bg-black">
+                    <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/VIDEO_ID_2" title="Thrash Party Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                        <span class="text-neonPink font-black uppercase italic text-xl shadow-black">Watch Video</span>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h2 class="text-xl font-bold uppercase tracking-wider">Add Your Video Here</h2>
+                </div>
+            </a>
+        </div>
+    </section> -->
+
     <section class="max-w-6xl mx-auto py-20 px-6">
         <h1 class="text-5xl font-black italic uppercase mb-12 tracking-tighter">The <span class="text-neonPink">Gallery</span></h1>
 
         <div id="photo-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
             </div>
+        <button id="show-more" class="mt-8 px-6 py-3 bg-neonPink text-black font-bold uppercase tracking-wider hover:bg-neonBlue transition">Show More</button>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 
     <script>
         const grid = document.getElementById('photo-grid');
-        const totalPhotos = 110; 
-    
-        for (let i = 1; i <= totalPhotos; i++) {
-            const fileName = `gig-photo${i}.jpeg`;
-            
-            const photoHTML = `
-                <a href="images/${fileName}" class="glightbox group relative block overflow-hidden border-2 border-zinc-800 hover:border-neonPink transition shadow-lg">
-                    <img src="images/${fileName}" alt="Thrash Party Live Shot ${i}" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100">
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                        <span class="text-neonPink font-black uppercase italic text-xl shadow-black">View Photo</span>
-                    </div>
-                </a>
-            `;
-            grid.innerHTML += photoHTML;
+        const totalPhotos = 110;
+        let loadedPhotos = 12;
+        
+        function loadPhotos(start, end) {
+            for (let i = start; i <= end; i++) {
+                const fileName = `gig-photo${i}.jpeg`;
+                
+                const photoHTML = `
+                    <a href="images/${fileName}" class="glightbox group relative block overflow-hidden border-2 border-zinc-800 hover:border-neonPink transition shadow-lg">
+                        <img src="images/${fileName}" alt="Thrash Party Live Shot ${i}" class="w-full h-64 object-cover group-hover:scale-105 transition duration-500 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <span class="text-neonPink font-black uppercase italic text-xl shadow-black">View Photo</span>
+                        </div>
+                    </a>
+                `;
+                grid.innerHTML += photoHTML;
+            }
         }
-    
-        // 3. Initialize Lightbox ONCE after everything is built
-        const lightbox = GLightbox({ 
+        
+        loadPhotos(1, 12);
+        
+        const showMoreBtn = document.getElementById('show-more');
+        showMoreBtn.addEventListener('click', () => {
+            loadPhotos(13, totalPhotos);
+            showMoreBtn.style.display = 'none';
+            // Reinitialize lightbox for new elements
+            lightbox.destroy();
+            lightbox = GLightbox({ selector: '.glightbox', touchNavigation: true, loop: true });
+        });
+        
+        // Initialize Lightbox after initial load
+        let lightbox = GLightbox({ 
             selector: '.glightbox',
             touchNavigation: true,
             loop: true
