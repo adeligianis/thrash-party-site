@@ -35,6 +35,24 @@
 
 <body class="bg-black text-white">
 
+  <!-- SVG Icons for Social Links -->
+  <svg style="display: none;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <defs>
+      <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+      </symbol>
+      <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+      </symbol>
+      <symbol id="icon-email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="16" x="2" y="4" rx="2"/>
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+      </symbol>
+    </defs>
+  </svg>
+
     <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
         <div class="flex justify-between items-center px-6 py-4">
             <a href="index.html" class="block">
@@ -47,6 +65,18 @@
                 <a href="songs.html" class="hover:text-neonPink transition">Songs</a>
                 <a href="media.html" class="hover:text-neonPink transition">Media</a>
                 <a href="contact.html" class="text-neonPink border border-neonPink px-4 py-2">Book Us</a>
+
+                <div class="flex space-x-4 border-l border-zinc-800 pl-8 text-zinc-400">
+                  <a href="https://instagram.com/thrashpartyband" target="_blank" class="hover:text-neonPink transition">
+                    <svg width="20" height="20" class="w-5 h-5"><use href="#icon-instagram"/></svg>
+                  </a>
+                  <a href="https://www.facebook.com/thrashpartyband" target="_blank" class="hover:text-neonBlue transition">
+                    <svg width="20" height="20" class="w-5 h-5"><use href="#icon-facebook"/></svg>
+                  </a>
+                  <a href="mailto:thrashpartyband@gmail.com" class="hover:text-white transition">
+                    <svg width="20" height="20" class="w-5 h-5"><use href="#icon-email"/></svg>
+                  </a>
+                </div>
             </div>
     
             <button id="menu-btn" class="md:hidden text-neonBlue">
@@ -60,6 +90,18 @@
             <a href="songs.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Songs</a>
             <a href="media.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Media</a>
             <a href="contact.html" class="text-2xl font-black italic uppercase text-neonPink border-2 border-neonPink px-8 py-3 w-full">Book Us</a>
+
+            <div class="flex space-x-8 pt-6 text-zinc-400">
+              <a href="https://instagram.com/thrashpartyband" target="_blank">
+                <svg width="28" height="28" class="w-7 h-7"><use href="#icon-instagram"/></svg>
+              </a>
+              <a href="https://www.facebook.com/thrashpartyband" target="_blank">
+                <svg width="28" height="28" class="w-7 h-7"><use href="#icon-facebook"/></svg>
+              </a>
+              <a href="mailto:thrashpartyband@gmail.com">
+                <svg width="28" height="28" class="w-7 h-7"><use href="#icon-email"/></svg>
+              </a>
+            </div>
         </div>
     </nav>
 
