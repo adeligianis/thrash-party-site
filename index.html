@@ -14,7 +14,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="favicon.png">
-  <title>Thrash Party | Official Site</title>
+  <title>Thrash Party | All Eras, One Party!</title>
   <meta name="description" content="New England's high-energy cover band for weddings, private events, and bars. 45+ anthems from every era. Based in Boston.">
   <link rel="canonical" href="https://www.thrashparty.com/">
 
@@ -70,41 +70,6 @@
       "https://instagram.com/thrashpartyband",
       "https://www.facebook.com/thrashpartyband"
     ]
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MusicEvent",
-    "name": "Thrash Party — Private Event",
-    "startDate": "2026-07-11",
-    "location": {
-      "@type": "Place",
-      "name": "Private Event",
-      "address": "Maine"
-    },
-    "performer": {
-      "@type": "MusicGroup",
-      "name": "Thrash Party"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MusicEvent",
-    "name": "Thrash Party at Wally's",
-    "startDate": "2026-07-17",
-    "location": {
-      "@type": "Place",
-      "name": "Wally's",
-      "address": "Hampton Beach, NH"
-    },
-    "performer": {
-      "@type": "MusicGroup",
-      "name": "Thrash Party"
-    },
-    "url": "https://wallysnh.com/"
   }
   </script>
 </head>
@@ -279,7 +244,40 @@
         High energy. All anthems.
       </p>
 
-      <div id="gig-container" class="space-y-4 text-left"></div>
+      <div id="gig-container" class="space-y-4 text-left">
+
+        <div class="gig-entry flex flex-col md:flex-row justify-between items-center p-6 border border-zinc-800 bg-black hover:border-neonBlue transition group"
+             data-iso-date="2026-07-11"
+             data-event-name="Thrash Party — Private Event"
+             data-venue="Private Event"
+             data-location="Maine">
+          <div class="mb-4 md:mb-0 text-center md:text-left">
+            <span class="text-neonBlue font-bold block italic uppercase text-sm">Saturday, July 11, 2026</span>
+            <span class="text-2xl font-black uppercase italic group-hover:text-white transition">Private Event</span>
+          </div>
+          <div class="text-zinc-500 font-bold uppercase tracking-widest">Maine</div>
+          <a href="contact.html" class="mt-4 md:mt-0 px-6 py-2 border-2 border-neonBlue text-neonBlue font-black italic uppercase hover:bg-neonBlue hover:text-black transition">
+            Details
+          </a>
+        </div>
+
+        <div class="gig-entry flex flex-col md:flex-row justify-between items-center p-6 border border-zinc-800 bg-black hover:border-neonBlue transition group"
+             data-iso-date="2026-07-17"
+             data-event-name="Thrash Party at Wally's"
+             data-venue="Wally's"
+             data-location="Hampton Beach, NH"
+             data-url="https://wallysnh.com/">
+          <div class="mb-4 md:mb-0 text-center md:text-left">
+            <span class="text-neonBlue font-bold block italic uppercase text-sm">Friday, July 17, 2026</span>
+            <span class="text-2xl font-black uppercase italic group-hover:text-white transition">Wally's</span>
+          </div>
+          <div class="text-zinc-500 font-bold uppercase tracking-widest">Hampton Beach, NH</div>
+          <a href="https://wallysnh.com/" target="_blank" class="mt-4 md:mt-0 px-6 py-2 border-2 border-neonBlue text-neonBlue font-black italic uppercase hover:bg-neonBlue hover:text-black transition">
+            Venue Info
+          </a>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -312,7 +310,6 @@
     <h2 class="text-5xl font-black italic uppercase mb-12 tracking-tighter">On <span class="text-neonBlue">The 'Gram</span></h2>
     <div class="elfsight-app-1c98a02b-b975-4258-bd96-6072b4b94cf8" data-elfsight-app-lazy></div>
   </section>
-    </section>
 
   <footer class="py-16 border-t border-zinc-900 text-center bg-black">
     <picture>
@@ -349,48 +346,37 @@
       });
     });
 
-    // Gig List Data
-    const gigs = [
-      {
-        date: "Saturday, July 11, 2026",
-        venue: "Private Event",
-        location: "Maine",
-        link: "https://thrashparty.com/contact"
-      },
-      {
-        date: "Friday, July 17, 2026",
-        venue: "Wally's",
-        location: "Hampton Beach, NH",
-        link: "https://wallysnh.com/"
-      }
-
-    ];
-
-    const DEFAULT_EMAIL = 'mailto:thrashpartyband@gmail.com';
+    // Empty state — shown only when all .gig-entry elements are removed from #gig-container
     const container = document.getElementById('gig-container');
-
-    if (gigs.length === 0) {
+    if (!container.querySelector('.gig-entry')) {
       container.innerHTML = '<p class="text-zinc-500 italic text-center w-full">No upcoming dates... Book us now!</p>';
-    } else {
-      gigs.forEach(gig => {
-        const isTicketLink = gig.link && gig.link.includes('http');
-        const finalLink = isTicketLink ? gig.link : DEFAULT_EMAIL;
-        const buttonText = isTicketLink ? 'Venue Info' : 'Details';
-
-        container.innerHTML += `
-          <div class="flex flex-col md:flex-row justify-between items-center p-6 border border-zinc-800 bg-black hover:border-neonBlue transition group">
-            <div class="mb-4 md:mb-0 text-center md:text-left">
-              <span class="text-neonBlue font-bold block italic uppercase text-sm">${gig.date}</span>
-              <span class="text-2xl font-black uppercase italic group-hover:text-white transition">${gig.venue}</span>
-            </div>
-            <div class="text-zinc-500 font-bold uppercase tracking-widest">${gig.location}</div>
-            <a href="${finalLink}" target="_blank" class="mt-4 md:mt-0 px-6 py-2 border-2 border-neonBlue text-neonBlue font-black italic uppercase hover:bg-neonBlue hover:text-black transition">
-              ${buttonText}
-            </a>
-          </div>
-        `;
-      });
     }
+
+    // Generate MusicEvent JSON-LD from hardcoded gig entries.
+    // To add a gig: add a .gig-entry div to #gig-container with data-iso-date,
+    // data-event-name, data-venue, data-location, and optionally data-url.
+    document.querySelectorAll('.gig-entry').forEach(entry => {
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "MusicEvent",
+        "name": entry.dataset.eventName,
+        "startDate": entry.dataset.isoDate,
+        "location": {
+          "@type": "Place",
+          "name": entry.dataset.venue,
+          "address": entry.dataset.location
+        },
+        "performer": {
+          "@type": "MusicGroup",
+          "name": "Thrash Party"
+        }
+      };
+      if (entry.dataset.url) schema.url = entry.dataset.url;
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(schema);
+      document.head.appendChild(script);
+    });
   </script>
 
   <script>
