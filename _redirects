@@ -1,0 +1,12 @@
+# Serve clean URLs by rewriting to .html files
+/songs    /songs.html    200
+/media    /media.html    200
+/contact  /contact.html  200
+/thanks   /thanks.html   200
+
+# Redirect .html URLs to clean URLs (301 permanent)
+# The ! bypasses Netlify's file-exists check so these always fire
+/songs.html    /songs    301!
+/media.html    /media    301!
+/contact.html  /contact  301!
+/thanks.html   /thanks   301!
