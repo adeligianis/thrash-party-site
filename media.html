@@ -13,14 +13,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png">
-    <title>Media | Thrash Party</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Photos &amp; Videos | Thrash Party</title>
+    <meta name="description" content="Watch Thrash Party live. Photos and video from weddings, private parties, and bar shows across New England.">
+    <link rel="canonical" href="https://www.thrashparty.com/media.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.thrashparty.com/media.html">
+    <meta property="og:title" content="Photos &amp; Videos | Thrash Party">
+    <meta property="og:description" content="Watch Thrash Party live. Photos and video from weddings, private parties, and bar shows across New England.">
+    <meta property="og:image" content="https://www.thrashparty.com/images/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Photos &amp; Videos | Thrash Party">
+    <meta name="twitter:description" content="Watch Thrash Party live. Photos and video from weddings, private parties, and bar shows across New England.">
+    <meta name="twitter:image" content="https://www.thrashparty.com/images/logo.png">
+    <link rel="stylesheet" href="tailwind.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-    <script>
-        tailwind.config = {
-          theme: { extend: { colors: { neonBlue: '#01ffff', neonPink: '#ff00ff' } } }
-        }
-    </script>
 </head>
 
 <body class="bg-black text-white">
@@ -28,7 +34,10 @@
     <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
         <div class="flex justify-between items-center px-6 py-4">
             <a href="index.html" class="block">
-                <img src="images/square-logo.png" alt="Thrash Party Logo" class="h-10 w-auto">
+              <picture>
+                <source srcset="images/square-logo.avif" type="image/avif">
+                <img src="images/square-logo.png" alt="Thrash Party Logo" width="200" height="171" class="h-10 w-auto">
+              </picture>
             </a>
     
             <div class="hidden md:flex space-x-8 font-bold text-lg uppercase tracking-widest items-center">

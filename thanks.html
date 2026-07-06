@@ -12,20 +12,9 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
     <title>Message Received | Thrash Party</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                neonBlue: '#01ffff',
-                neonPink: '#ff00ff',
-              }
-            }
-          }
-        }
-    </script>
+    <link rel="stylesheet" href="tailwind.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
         body { font-family: 'Inter', sans-serif; }
@@ -43,7 +32,10 @@
     <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
         <div class="flex justify-between items-center px-6 py-4">
             <a href="index.html" class="block">
-                <img src="images/square-logo.png" alt="Thrash Party Logo" class="h-10 w-auto">
+              <picture>
+                <source srcset="images/square-logo.avif" type="image/avif">
+                <img src="images/square-logo.png" alt="Thrash Party Logo" width="200" height="171" class="h-10 w-auto">
+              </picture>
             </a>
             <div class="hidden md:flex space-x-8 font-bold text-lg uppercase tracking-widest items-center">
                 <a href="index.html" class="hover:text-neonBlue transition">Home</a>

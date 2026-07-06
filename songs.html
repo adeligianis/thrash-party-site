@@ -13,13 +13,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png">
-    <title>Song List | Thrash Party</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-          theme: { extend: { colors: { neonBlue: '#01ffff', neonPink: '#ff00ff' } } }
-        }
-    </script>
+    <title>Full Setlist | Thrash Party</title>
+    <meta name="description" content="Full setlist for Thrash Party — 45+ songs spanning rock classics, pop anthems, and Millennial favorites. Based in New England.">
+    <link rel="canonical" href="https://www.thrashparty.com/songs.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.thrashparty.com/songs.html">
+    <meta property="og:title" content="Full Setlist | Thrash Party">
+    <meta property="og:description" content="Full setlist for Thrash Party — 45+ songs spanning rock classics, pop anthems, and Millennial favorites. Based in New England.">
+    <meta property="og:image" content="https://www.thrashparty.com/images/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Full Setlist | Thrash Party">
+    <meta name="twitter:description" content="Full setlist for Thrash Party — 45+ songs spanning rock classics, pop anthems, and Millennial favorites. Based in New England.">
+    <meta name="twitter:image" content="https://www.thrashparty.com/images/logo.png">
+    <link rel="stylesheet" href="tailwind.css">
 </head>
 
 <body class="bg-black text-white">
@@ -27,16 +33,19 @@
     <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
         <div class="flex justify-between items-center px-6 py-4">
             <a href="index.html" class="block">
-                <img src="images/square-logo.png" alt="Thrash Party Logo" class="h-10 w-auto">
+              <picture>
+                <source srcset="images/square-logo.avif" type="image/avif">
+                <img src="images/square-logo.png" alt="Thrash Party Logo" width="200" height="171" class="h-10 w-auto">
+              </picture>
             </a>
-    
+
             <div class="hidden md:flex space-x-8 font-bold text-lg uppercase tracking-widest items-center">
                 <a href="index.html" class="text-neonBlue">Home</a>
                 <a href="index.html#gigs">Gigs</a>
                 <a href="songs.html" class="hover:text-neonPink transition">Songs</a>
                 <a href="media.html" class="hover:text-neonPink transition">Media</a>
                 <a href="contact.html" class="hover:text-neonPink transition border border-neonPink px-4 py-2">Book Us</a>
-                
+
                 <div class="flex space-x-4 border-l border-zinc-800 pl-8 text-zinc-400">
                     <a href="https://instagram.com/thrashpartyband" target="_blank" class="hover:text-neonPink transition">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
@@ -49,12 +58,12 @@
                     </a>
                 </div>
             </div>
-    
+
             <button id="menu-btn" class="md:hidden text-neonBlue">
                 <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
         </div>
-    
+
       <!-- mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-zinc-900 px-6 py-8 space-y-6 flex flex-col items-center text-center">
             <a href="index.html" class="text-2xl font-black italic uppercase text-neonBlue">Home</a>
@@ -62,7 +71,7 @@
             <a href="songs.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Songs</a>
             <a href="media.html" class="text-2xl font-black italic uppercase hover:text-neonPink">Media</a>
             <a href="contact.html" class="text-2xl font-black italic uppercase text-neonPink border-2 border-neonPink px-8 py-3 w-full">Book Us</a>
-            
+
             <div class="flex space-x-8 pt-6 text-zinc-400">
                 <a href="https://instagram.com/thrashpartyband" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
                 <a href="https://www.facebook.com/thrashpartyband" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
@@ -70,33 +79,11 @@
             </div>
         </div>
     </nav>
-    
-   <!-- <header class="relative h-[70vh] flex items-center justify-center overflow-hidden bg-black">
-        <div class="absolute inset-0 z-0 pointer-events-none opacity-60">
-            <iframe 
-                class="w-full h-full object-cover scale-150" 
-                src="https://www.youtube.com/embed/4JGvHpwoso4?autoplay=1&mute=1&controls=0&loop=1&playlist=4JGvHpwoso4&start=10&end=55&rel=0" 
-                frameborder="0" 
-                allow="autoplay; encrypted-media">
-            </iframe>
-        </div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80 z-10 pointer-events-none"></div>
-    
-        <div class="relative z-20 text-center px-4">
-            <img src="images/logo.png" alt="Thrash Party" class="mx-auto mb-6 h-40 md:h-60 drop-shadow-[0_0_20px_rgba(1,255,255,0.8)]">
-            <h1 class="text-6xl md:text-8xl font-black italic tracking-tighter mb-4 drop-shadow-[0_0_15px_rgba(255,0,255,0.8)]">
-                <span class="text-white">ALL ERAS </span><span class="text-neonPink">ONE PARTY!</span>
-            </h1>
-            <p class="text-xl md:text-2xl font-bold uppercase tracking-widest text-neonBlue drop-shadow-[0_0_10px_rgba(1,255,255,0.5)]">
-                New England's "Everything to 11" Party Band
-            </p>
-        </div>
-    </header> -->
-    
+
     <script>
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-    
+
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
@@ -106,123 +93,486 @@
         <h1 class="text-6xl md:text-8xl font-black italic uppercase mb-4 tracking-tighter">The <span class="text-neonBlue">Hit List</span></h1>
         <p class="text-zinc-400 uppercase tracking-widest font-bold mb-12">All the Bangers We Play Live</p>
 
-        <input type="text" id="songSearch" placeholder="Search for an artist or song..." 
+        <input type="text" id="songSearch" placeholder="Search for an artist or song..."
                class="w-full bg-zinc-900 border-2 border-zinc-700 p-4 mb-8 focus:border-neonBlue outline-none transition text-xl italic font-bold">
 
         <div id="song-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="1985" data-artist="bowling for soup">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">1985</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Bowling For Soup</div>
+                </div>
             </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="500 miles" data-artist="the proclaimers">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">500 Miles</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">The Proclaimers</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="7 nation army" data-artist="the white stripes">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">7 Nation Army</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">The White Stripes</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="all night longer" data-artist="sammy adams">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">All Night Longer</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Sammy Adams</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="all the small things" data-artist="blink-182">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">All The Small Things</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Blink-182</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="american girl" data-artist="tom petty">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">American Girl</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Tom Petty</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="anthem" data-artist="good charlotte">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Anthem</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Good Charlotte</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="are you gonna be my girl?" data-artist="jet">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Are You Gonna Be My Girl?</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Jet</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="basket case" data-artist="green day">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Basket Case</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Green Day</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="beer never broke my heart" data-artist="luke combs">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Beer Never Broke My Heart</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Luke Combs</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="break stuff" data-artist="limp bizkit">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Break Stuff</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Limp Bizkit</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="check yes juliet" data-artist="we the kings">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Check Yes Juliet</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">We The Kings</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="chicken fried" data-artist="zac brown band">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Chicken Fried</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Zac Brown Band</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="country girl (shake it for me)" data-artist="luke bryan">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Country Girl (Shake It For Me)</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Luke Bryan</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="country roads" data-artist="john denver">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Country Roads</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">John Denver</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="crazy train" data-artist="ozzy osbourne">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Crazy Train</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Ozzy Osbourne</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="creep" data-artist="radiohead">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Creep</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Radiohead</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="dirty little secret" data-artist="the all-american rejects">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Dirty Little Secret</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">The All-American Rejects</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="don't stop believing" data-artist="journey">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Don't Stop Believing</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Journey</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="everybody talks" data-artist="neon trees">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Everybody Talks</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Neon Trees</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="fat lip" data-artist="sum 41">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Fat Lip</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Sum 41</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="fight for your right" data-artist="beastie boys">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Fight for Your Right</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Beastie Boys</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="friends in low places" data-artist="garth brooks">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Friends in Low Places</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Garth Brooks</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="good riddance (time of your life)" data-artist="green day">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Good Riddance (Time of your Life)</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Green Day</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="higher" data-artist="creed">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Higher</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Creed</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="hot 2 go" data-artist="chappell roan">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">HOT 2 GO</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Chappell Roan</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="i believe in a thing called love" data-artist="the darkness">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">I Believe in a Thing Called Love</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">The Darkness</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="i had some help" data-artist="post malone ft. morgan wallen">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">I Had Some Help</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Post Malone ft. Morgan Wallen</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="i write sins, not tragedies" data-artist="panic! at the disco">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">I Write Sins, Not Tragedies</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Panic! At The Disco</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="in the end" data-artist="linkin park">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">In The End</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Linkin Park</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="iris" data-artist="goo goo dolls">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Iris</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Goo Goo Dolls</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="jessie's girl" data-artist="rick springfield">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Jessie's Girl</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Rick Springfield</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="just the way you are" data-artist="bruno mars">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Just The Way You Are</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Bruno Mars</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="last friday night (tgif)" data-artist="katy perry">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Last Friday Night (TGIF)</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Katy Perry</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="lifestyles of the rich and famous" data-artist="good charlotte">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Lifestyles of the Rich and Famous</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Good Charlotte</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="livin on a prayer" data-artist="bon jovi">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Livin on a Prayer</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Bon Jovi</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="lose control" data-artist="teddy swims">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Lose Control</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Teddy Swims</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="love story" data-artist="taylor swift">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Love Story</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Taylor Swift</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="move along" data-artist="the all-american rejects">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Move Along</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">The All-American Rejects</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="mr. brightside" data-artist="the killers">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Mr. Brightside</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">The Killers</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="my own worst enemy" data-artist="lit">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">My Own Worst Enemy</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Lit</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="ocean ave" data-artist="yellowcard">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Ocean Ave</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Yellowcard</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="party hard" data-artist="andrew w.k.">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Party Hard</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Andrew W.K.</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="pink pony club" data-artist="chappell roan">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Pink Pony Club</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Chappell Roan</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="rebel yell" data-artist="billy idol">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Rebel Yell</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Billy Idol</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="revival" data-artist="zach bryan">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Revival</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Zach Bryan</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="ride" data-artist="twenty one pilots">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Ride</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Twenty One Pilots</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="santeria" data-artist="sublime">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Santeria</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Sublime</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="save a horse (ride a cowboy)" data-artist="big & rich">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Save a Horse (Ride a Cowboy)</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Big &amp; Rich</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="semi-charmed life" data-artist="third eye blind">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Semi-Charmed Life</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Third Eye Blind</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="sex on fire" data-artist="kings of leon">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Sex on Fire</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Kings of Leon</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="shipping up to boston" data-artist="dropkick murphys">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Shipping Up To Boston</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Dropkick Murphys</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="shut up & dance" data-artist="walk the moon">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Shut Up &amp; Dance</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Walk The Moon</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="since u been gone" data-artist="kelly clarkson">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Since U Been Gone</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Kelly Clarkson</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="somebody told me" data-artist="the killers">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Somebody Told Me</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">The Killers</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="song 2" data-artist="blur">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Song 2</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Blur</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="stacy's mom" data-artist="fountains of wayne">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Stacy's Mom</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Fountains of Wayne</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="stick season" data-artist="noah kahan">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Stick Season</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Noah Kahan</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="still into you" data-artist="paramore">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Still Into You</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Paramore</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="stitches" data-artist="shawn mendes">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Stitches</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Shawn Mendes</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="style" data-artist="taylor swift">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Style</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Taylor Swift</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="sugar we're goin down" data-artist="fall out boy">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Sugar We're Goin Down</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Fall Out Boy</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="summer of 69" data-artist="bryan adams">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Summer of 69</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Bryan Adams</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="superstition" data-artist="stevie wonder">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Superstition</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Stevie Wonder</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="sweet caroline" data-artist="neil diamond">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Sweet Caroline</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Neil Diamond</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="sweetness" data-artist="jimmy eat world">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Sweetness</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Jimmy Eat World</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="take me out" data-artist="franz ferdinand">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Take Me Out</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Franz Ferdinand</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="teenage dirtbag" data-artist="wheatus">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Teenage Dirtbag</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Wheatus</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="tennessee whiskey" data-artist="chris stapleton">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Tennessee Whiskey</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Chris Stapleton</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="the great escape" data-artist="boys like girls">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">The Great Escape</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Boys Like Girls</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="the middle" data-artist="jimmy eat world">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">The Middle</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Jimmy Eat World</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="unwritten" data-artist="natasha bedingfield">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Unwritten</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Natasha Bedingfield</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="what i got" data-artist="sublime">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">What I Got</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Sublime</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="what's my age again" data-artist="blink-182">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">What's My Age Again</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Blink-182</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="whats up" data-artist="4 non blondes">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Whats Up</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">4 Non Blondes</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="when i come around" data-artist="green day">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">When I Come Around</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">Green Day</div>
+                </div>
+            </div>
+            <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition" data-title="zombie" data-artist="the cranberries">
+                <div>
+                    <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">Zombie</div>
+                    <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">The Cranberries</div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <script>
-        // 1. Your Song List
-        const songs = [
-            { title: "Whats Up", artist: "4 Non Blondes" },
-            { title: "Dirty Little Secret", artist: "The All-American Rejects" },
-            { title: "Move Along", artist: "The All-American Rejects" },
-            { title: "Party Hard", artist: "Andrew W.K." },
-            { title: "Fight for Your Right", artist: "Beastie Boys" },
-            { title: "Beer Never Broke My Heart", artist: "Luke Combs" },
-            { title: "Save a Horse (Ride a Cowboy)", artist: "Big & Rich" },
-            { title: "Rebel Yell", artist: "Billy Idol" },
-            { title: "All The Small Things", artist: "Blink-182" },
-            { title: "What's My Age Again", artist: "Blink-182" },
-            { title: "Song 2", artist: "Blur" },
-            { title: "Livin on a Prayer", artist: "Bon Jovi" },
-            { title: "1985", artist: "Bowling For Soup" },
-            { title: "Summer of 69", artist: "Bryan Adams" },
-            { title: "HOT 2 GO", artist: "Chappell Roan" },
-            { title: "Pink Pony Club", artist: "Chappell Roan" },
-            { title: "Tennessee Whiskey", artist: "Chris Stapleton" },
-            { title: "Zombie", artist: "The Cranberries" },
-            { title: "Higher", artist: "Creed" },
-            { title: "Sugar We're Goin Down", artist: "Fall Out Boy" },
-            { title: "Stacy's Mom", artist: "Fountains of Wayne" },
-            { title: "Friends in Low Places", artist: "Garth Brooks" },
-            { title: "Anthem", artist: "Good Charlotte" },
-            { title: "Lifestyles of the Rich and Famous", artist: "Good Charlotte" },
-            { title: "Basket Case", artist: "Green Day" },
-            { title: "Good Riddance (Time of your Life)", artist: "Green Day" },
-            { title: "When I Come Around", artist: "Green Day" },
-            { title: "Are You Gonna Be My Girl?", artist: "Jet" },
-            { title: "Sweetness", artist: "Jimmy Eat World" },
-            { title: "The Middle", artist: "Jimmy Eat World" },
-            { title: "Country Roads", artist: "John Denver" },
-            { title: "Don't Stop Believing", artist: "Journey" },
-            { title: "Since U Been Gone", artist: "Kelly Clarkson" },
-            { title: "Sex on Fire", artist: "Kings of Leon" },
-            { title: "In The End", artist: "Linkin Park" },
-            { title: "My Own Worst Enemy", artist: "Lit" },
-            { title: "Country Girl (Shake It For Me)", artist: "Luke Bryan" },
-            { title: "Unwritten", artist: "Natasha Bedingfield" },
-            { title: "Sweet Caroline", artist: "Neil Diamond" },
-            { title: "Stick Season", artist: "Noah Kahan" },
-            { title: "Crazy Train", artist: "Ozzy Osbourne" },
-            { title: "I Write Sins, Not Tragedies", artist: "Panic! At The Disco" },
-            { title: "Still Into You", artist: "Paramore" },
-            { title: "I Had Some Help", artist: "Post Malone ft. Morgan Wallen" },
-            { title: "Jessie's Girl", artist: "Rick Springfield" },
-            { title: "All Night Longer", artist: "Sammy Adams" },
-            { title: "Stitches", artist: "Shawn Mendes" },
-            { title: "Superstition", artist: "Stevie Wonder" },
-            { title: "Santeria", artist: "Sublime" },
-            { title: "Take Me Out", artist: "Franz Ferdinand" },
-            { title: "What I Got", artist: "Sublime" },
-            { title: "Fat Lip", artist: "Sum 41" },
-            { title: "Love Story", artist: "Taylor Swift" },
-            { title: "Style", artist: "Taylor Swift" },
-            { title: "Lose Control", artist: "Teddy Swims" },
-            { title: "I Believe in a Thing Called Love", artist: "The Darkness" },
-            { title: "Shipping Up To Boston", artist: "Dropkick Murphys" },
-            { title: "Mr. Brightside", artist: "The Killers" },
-            { title: "Somebody Told Me", artist: "The Killers" },
-            { title: "500 Miles", artist: "The Proclaimers" },
-            { title: "Semi-Charmed Life", artist: "Third Eye Blind" },
-            { title: "American Girl", artist: "Tom Petty" },
-            { title: "Shut Up & Dance", artist: "Walk The Moon" },
-            { title: "Check Yes Juliet", artist: "We The Kings" },
-            { title: "Teenage Dirtbag", artist: "Wheatus" },
-            { title: "7 Nation Army", artist: "The White Stripes" },
-            { title: "Ocean Ave", artist: "Yellowcard" },
-            { title: "Chicken Fried", artist: "Zac Brown Band" },
-            { title: "Creep", artist: "Radiohead" },
-            { title: "Last Friday Night (TGIF)", artist: "Katy Perry" },
-            { title: "The Great Escape", artist: "Boys Like Girls" },
-            { title: "Revival", artist: "Zach Bryan" },
-            { title: "Just The Way You Are", artist: "Bruno Mars" },
-            { title: "Ride", artist: "Twenty One Pilots" },
-            { title: "Everybody Talks", artist: "Neon Trees" },
-            { title: "Break Stuff", artist: "Limp Bizkit" },
-            { title: "Iris", artist: "Goo Goo Dolls" }
-        ];
-    
-        // 2. THE AUTOMATIC SORTING LOGIC
-        // This sorts the array by title (A-Z) before it ever hits the screen
-        songs.sort((a, b) => a.title.localeCompare(b.title));
-    
-        const list = document.getElementById('song-list');
         const search = document.getElementById('songSearch');
-    
-        function displaySongs(filter = '') {
-            list.innerHTML = '';
-            const filtered = songs.filter(s => 
-                s.title.toLowerCase().includes(filter.toLowerCase()) || 
-                s.artist.toLowerCase().includes(filter.toLowerCase())
-            );
-    
-            filtered.forEach(s => {
-                list.innerHTML += `
-                    <div class="p-4 border-l-4 border-neonPink bg-zinc-900/50 flex justify-between items-center group hover:bg-zinc-800 transition">
-                        <div>
-                            <div class="font-black italic uppercase text-lg group-hover:text-neonBlue">${s.title}</div>
-                            <div class="text-xs font-bold text-zinc-500 uppercase tracking-widest">${s.artist}</div>
-                        </div>
-                    </div>
-                `;
+        const cards = document.querySelectorAll('#song-list [data-title]');
+
+        search.addEventListener('input', (e) => {
+            const filter = e.target.value.toLowerCase();
+            cards.forEach(card => {
+                const match = card.dataset.title.includes(filter) || card.dataset.artist.includes(filter);
+                card.style.display = match ? '' : 'none';
             });
-        }
-    
-        search.addEventListener('input', (e) => displaySongs(e.target.value));
-        displaySongs();
+        });
     </script>
 </body>
 </html>

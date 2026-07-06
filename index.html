@@ -15,6 +15,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="favicon.png">
   <title>Thrash Party | Official Site</title>
+  <meta name="description" content="New England's high-energy cover band for weddings, private events, and bars. 45+ anthems from every era. Based in Boston.">
+  <link rel="canonical" href="https://www.thrashparty.com/">
 
   <!-- Open Graph Tags -->
   <meta property="og:title" content="Thrash Party | All Eras, One Party!">
@@ -30,22 +32,8 @@
   <meta name="twitter:image" content="https://www.thrashparty.com/og-image.jpg">
 
   <!-- External Libraries -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="tailwind.css">
   <script src="https://elfsightcdn.com/platform.js" async></script>
-
-  <!-- Tailwind Configuration -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            neonBlue: '#01ffff',
-            neonPink: '#ff00ff',
-          }
-        }
-      }
-    }
-  </script>
 
   <!-- Styles -->
   <style>
@@ -68,6 +56,57 @@
       background: #01ffff; /* Flips to Neon Blue on hover */
     }
   </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Thrash Party",
+    "description": "New England's high-energy cover band for weddings, private events, bars and clubs.",
+    "url": "https://www.thrashparty.com",
+    "genre": ["Pop", "Rock", "Cover Band"],
+    "areaServed": "New England",
+    "sameAs": [
+      "https://instagram.com/thrashpartyband",
+      "https://www.facebook.com/thrashpartyband"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    "name": "Thrash Party — Private Event",
+    "startDate": "2026-07-11",
+    "location": {
+      "@type": "Place",
+      "name": "Private Event",
+      "address": "Maine"
+    },
+    "performer": {
+      "@type": "MusicGroup",
+      "name": "Thrash Party"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    "name": "Thrash Party at Wally's",
+    "startDate": "2026-07-17",
+    "location": {
+      "@type": "Place",
+      "name": "Wally's",
+      "address": "Hampton Beach, NH"
+    },
+    "performer": {
+      "@type": "MusicGroup",
+      "name": "Thrash Party"
+    },
+    "url": "https://wallysnh.com/"
+  }
+  </script>
 </head>
 
 <body class="bg-black text-white">
@@ -92,7 +131,10 @@
 <nav class="border-b border-neonBlue bg-black sticky top-0 z-[100]">
     <div class="flex justify-between items-center px-6 py-4">
       <a href="index.html" class="block">
-        <img src="images/square-logo.png" alt="Thrash Party Logo" class="h-10 w-auto">
+        <picture>
+          <source srcset="images/square-logo.avif" type="image/avif">
+          <img src="images/square-logo.png" alt="Thrash Party Logo" width="200" height="171" class="h-10 w-auto">
+        </picture>
       </a>
 
       <div class="hidden md:flex space-x-8 font-bold text-lg uppercase tracking-widest items-center">
@@ -152,7 +194,10 @@
     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-80 z-10 pointer-events-none"></div>
 
     <div class="relative z-20 text-center px-4">
-      <img src="images/logo.png" alt="Thrash Party" class="mx-auto mb-6 h-40 md:h-60 drop-shadow-[0_0_20px_rgba(1,255,255,0.8)]">
+      <picture>
+        <source srcset="images/logo.avif" type="image/avif">
+        <img src="images/logo.png" alt="Thrash Party" width="1000" height="444" class="mx-auto mb-6 w-auto h-40 md:h-60 drop-shadow-[0_0_20px_rgba(1,255,255,0.8)]">
+      </picture>
       <h1 class="text-6xl md:text-8xl font-black italic tracking-tighter mb-4 drop-shadow-[0_0_15px_rgba(255,0,255,0.8)]">
         <span class="text-white">ALL ERAS </span><span class="text-neonPink">ONE PARTY!</span>
       </h1>
@@ -203,17 +248,17 @@
       </p>
 
       <div class="inline-block border-4 border-zinc-800 p-1 transform -rotate-3 bg-zinc-900 w-48 shadow-xl -ml-4 md:-ml-8">
-        <img src="images/gig-photo67.jpeg" alt="Thrash Party Detail">
+        <img src="images/gig-photo67-sm.jpeg" alt="Thrash Party Detail" width="400" height="266" loading="lazy">
       </div>
     </div>
 
     <div class="relative h-[400px] md:h-[500px] flex items-center justify-center">
       <div class="absolute z-10 border-4 border-zinc-800 p-2 transform rotate-2 bg-zinc-900 w-4/5 shadow-2xl">
-        <img src="images/gig-photo29.jpeg" alt="Thrash Party Live">
+        <img src="images/gig-photo29-sm.jpeg" alt="Thrash Party Live" width="656" height="820" loading="lazy">
       </div>
 
       <div class="absolute z-20 -bottom-4 -right-4 border-4 border-zinc-800 p-1 transform -rotate-6 bg-zinc-900 w-1/2 shadow-2xl">
-        <img src="images/gig-photo14.jpeg" alt="Thrash Party Crowd">
+        <img src="images/gig-photo14-sm.jpeg" alt="Thrash Party Crowd" width="409" height="512" loading="lazy">
       </div>
     </div>
   </section>
@@ -270,7 +315,10 @@
     </section>
 
   <footer class="py-16 border-t border-zinc-900 text-center bg-black">
-    <img src="images/square-logo.png" alt="Logo" class="h-16 mx-auto mb-8 opacity-50">
+    <picture>
+      <source srcset="images/square-logo.avif" type="image/avif">
+      <img src="images/square-logo.png" alt="Logo" width="200" height="171" loading="lazy" class="h-16 w-auto mx-auto mb-8 opacity-50">
+    </picture>
     <div class="flex justify-center space-x-6 mb-8 text-zinc-500">
       <a href="https://instagram.com/thrashpartyband" class="hover:text-neonPink transition">
         <svg width="24" height="24" class="w-6 h-6"><use href="#icon-instagram"/></svg>
