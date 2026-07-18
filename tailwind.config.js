@@ -5,6 +5,8 @@ module.exports = {
       colors: {
         neonBlue: '#01ffff',
         neonPink: '#ff00ff',
+        pumpkinOrange: '#ff7518',
+        witchPurple: '#9d00ff',
       }
     }
   },
