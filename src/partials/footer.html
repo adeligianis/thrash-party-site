@@ -1,0 +1,22 @@
+<footer class="{{footerPadding}} border-t border-zinc-900 text-center bg-black">
+  {{#if showFooterLogo}}
+  <picture>
+    <source srcset="images/square-logo.avif" type="image/avif">
+    <img src="images/square-logo.png" alt="Logo" width="200" height="171" loading="lazy" class="h-16 w-auto mx-auto mb-8 opacity-50">
+  </picture>
+  {{/if}}
+  {{#if showFooterSocial}}
+  <div class="flex justify-center space-x-6 mb-8 text-zinc-500">
+    <a href="https://instagram.com/thrashpartyband" class="hover:text-neonPink transition">
+      <svg width="24" height="24" class="w-6 h-6"><use href="#icon-instagram"/></svg>
+    </a>
+    <a href="https://www.facebook.com/thrashpartyband" class="hover:text-neonBlue transition">
+      <svg width="24" height="24" class="w-6 h-6"><use href="#icon-facebook"/></svg>
+    </a>
+    <a href="mailto:thrashpartyband@gmail.com" class="hover:text-white transition">
+      <svg width="24" height="24" class="w-6 h-6"><use href="#icon-email"/></svg>
+    </a>
+  </div>
+  {{/if}}
+  <p class="text-zinc-600 text-xs font-bold uppercase tracking-widest">&copy; 2026 Thrash Party.</p>
+</footer>

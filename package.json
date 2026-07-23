@@ -4,7 +4,9 @@
   "description": "",
   "scripts": {
     "build:css": "tailwindcss -i input.css -o tailwind.css --minify",
-    "watch:css": "tailwindcss -i input.css -o tailwind.css --watch"
+    "watch:css": "tailwindcss -i input.css -o tailwind.css --watch",
+    "build:html": "node scripts/build-html.js",
+    "build": "npm run build:css && npm run build:html"
   },
   "repository": {
     "type": "git",
