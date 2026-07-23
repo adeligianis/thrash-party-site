@@ -563,6 +563,11 @@
     </section>
 
     <script>
+        const songList = document.getElementById('song-list');
+        Array.from(songList.querySelectorAll('[data-title]'))
+            .sort((a, b) => a.dataset.title.localeCompare(b.dataset.title))
+            .forEach(card => songList.appendChild(card));
+
         const search = document.getElementById('songSearch');
         const cards = document.querySelectorAll('#song-list [data-title]');
 
