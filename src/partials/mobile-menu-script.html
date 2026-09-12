@@ -5,8 +5,8 @@
   menuBtn.addEventListener('click', () => {
     mobileMenu.classList.toggle('hidden');
   });
-  {{#if closeMenuOnLinkClick}}
-  const navLinks = mobileMenu.querySelectorAll('a');
+  {{#if closeMenuOnLinkClick}};
+  const navLinks = mobileMenu.querySelectorAll('a')
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       mobileMenu.classList.add('hidden');
