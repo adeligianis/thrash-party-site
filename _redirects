@@ -4,6 +4,7 @@
 /contact  /contact.html  200
 /thanks   /thanks.html   200
 /weddings /weddings.html 200
+/requests /requests.html 200
 
 # Redirect .html URLs to clean URLs (301 permanent)
 # The ! bypasses Netlify's file-exists check so these always fire
@@ -12,3 +13,4 @@
 /contact.html  /contact  301!
 /thanks.html   /thanks   301!
 /weddings.html /weddings 301!
+/requests.html /requests 301!
