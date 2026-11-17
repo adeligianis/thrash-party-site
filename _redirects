@@ -1,10 +1,28 @@
+# requests.thrashparty.com serves the requests/ folder as its site root.
+# Rules run top to bottom and the first match wins, so these host rules come
+# before the general clean-URL rules below.
+# The ! forces each rule even when a file exists at that path (e.g. the main
+# index.html at /), which is why Netlify's own paths and the shared images
+# need explicit pass-through rules ahead of the catch-all.
+https://requests.thrashparty.com/.netlify/*  /.netlify/:splat   200!
+https://requests.thrashparty.com/images/*    /images/:splat     200!
+https://requests.thrashparty.com/*           /requests/:splat   200!
+
+# The main domain sends anyone on /requests over to the subdomain.
+# Host-scoped, so the subdomain rewrite above can never land here.
+https://thrashparty.com/requests             https://requests.thrashparty.com/         301!
+https://thrashparty.com/requests/*           https://requests.thrashparty.com/:splat   301!
+https://thrashparty.com/requests.html        https://requests.thrashparty.com/         301!
+https://www.thrashparty.com/requests         https://requests.thrashparty.com/         301!
+https://www.thrashparty.com/requests/*       https://requests.thrashparty.com/:splat   301!
+https://www.thrashparty.com/requests.html    https://requests.thrashparty.com/         301!
+
 # Serve clean URLs by rewriting to .html files
 /songs    /songs.html    200
 /media    /media.html    200
 /contact  /contact.html  200
 /thanks   /thanks.html   200
 /weddings /weddings.html 200
-/requests /requests.html 200
 
 # Redirect .html URLs to clean URLs (301 permanent)
 # The ! bypasses Netlify's file-exists check so these always fire
@@ -13,4 +31,3 @@
 /contact.html  /contact  301!
 /thanks.html   /thanks   301!
 /weddings.html /weddings 301!
-/requests.html /requests 301!

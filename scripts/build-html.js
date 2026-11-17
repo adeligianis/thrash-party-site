@@ -42,8 +42,10 @@ function substituteTokens(content, data, pageName) {
   });
 }
 
+// pageFile is relative to PAGES_DIR and may sit in a subfolder
+// (requests/index.html builds to requests/index.html at the site root).
 function buildPage(pageFile, outDir) {
-  const pageName = path.basename(pageFile, '.html');
+  const pageName = pageFile.slice(0, -'.html'.length);
   const pagePath = path.join(PAGES_DIR, pageFile);
   const dataPath = path.join(PAGES_DIR, `${pageName}.data.js`);
 
@@ -60,6 +62,7 @@ function buildPage(pageFile, outDir) {
   output = substituteTokens(output, data, pageFile);
 
   const outPath = path.join(outDir, `${pageName}.html`);
+  fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, output);
   return outPath;
 }
@@ -70,7 +73,7 @@ function main() {
   fs.mkdirSync(outDir, { recursive: true });
 
   const pageFiles = fs
-    .readdirSync(PAGES_DIR)
+    .readdirSync(PAGES_DIR, { recursive: true })
     .filter((f) => f.endsWith('.html'));
 
   if (pageFiles.length === 0) {
