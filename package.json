@@ -23,5 +23,9 @@
   "homepage": "https://github.com/adeligianis/thrash-party-site#readme",
   "devDependencies": {
     "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "firebase-admin": "^14.5.0",
+    "stripe": "^23.1.0"
   }
 }

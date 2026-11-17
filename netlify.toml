@@ -1,3 +1,7 @@
 [build]
   command = "npm run build"
   publish = "."
+
+[functions]
+  # stripe-webhook reads the song list the requests page loads.
+  included_files = ["requests/songs.json"]

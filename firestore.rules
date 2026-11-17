@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Members collection - PIN hashes stored here
+    match /members/{memberId} {
+      allow read, write: if true;
+    }
+
+    // Gigs collection
+    match /gigs/{gigId} {
+      allow read, write: if true;
+    }
+
+    // Unavailability collection
+    match /unavailability/{entryId} {
+      allow read, write: if true;
+    }
+
+    // Song requests, written only by the stripe-webhook Netlify Function
+    // (firebase-admin bypasses these rules). The band, signed in through
+    // band-login with the custom claim band: true, can read them and change
+    // only status and statusAt. No create or delete rule, so browsers can't.
+    match /requests/{requestId} {
+      allow read: if request.auth != null && request.auth.token.band == true;
+      allow update: if request.auth != null && request.auth.token.band == true
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'statusAt']);
+    }
+
+    // shows and meta: band-only read, create and update; no delete rule.
+    match /shows/{showId} {
+      allow read, create, update: if request.auth != null && request.auth.token.band == true;
+    }
+
+    match /meta/{metaId} {
+      allow read, create, update: if request.auth != null && request.auth.token.band == true;
+    }
+
+  }
+}
