@@ -2,6 +2,10 @@
   command = "npm run build"
   publish = "."
 
+[build.environment]
+  # Functions run on the build's Node version; firebase-admin needs 22+.
+  NODE_VERSION = "22"
+
 [functions]
   # stripe-webhook reads the song list the requests page loads.
   included_files = ["requests/songs.json"]
