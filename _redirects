@@ -2,9 +2,9 @@
 # Rules run top to bottom and the first match wins, so these host rules come
 # before the general clean-URL rules below.
 # The ! forces each rule even when a file exists at that path (e.g. the main
-# index.html at /), which is why Netlify's own paths and the shared images
-# need explicit pass-through rules ahead of the catch-all.
-https://requests.thrashparty.com/.netlify/*  /.netlify/:splat   200!
+# index.html at /), which is why the shared images need an explicit
+# pass-through rule ahead of the catch-all. /.netlify/* (functions) never
+# reaches these rules: Netlify handles it first and rejects rules for it.
 https://requests.thrashparty.com/images/*    /images/:splat     200!
 https://requests.thrashparty.com/*           /requests/:splat   200!
 
