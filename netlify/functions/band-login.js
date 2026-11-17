@@ -4,10 +4,10 @@
 'use strict';
 
 const crypto = require('crypto');
-const { getAuth } = require('firebase-admin/auth');
-const { firebaseApp } = require('../lib/firebase');
+const { serviceAccount } = require('../lib/firebase');
 
 const WRONG_PIN_DELAY_MS = 1000;
+const TOKEN_AUDIENCE = 'https://identitytoolkit.googleapis.com/google.identity.identitytoolkit.v1.IdentityToolkit';
 
 const reply = (statusCode, body) => ({
   statusCode,
@@ -21,6 +21,20 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 function pinMatches(given, expected) {
   const hash = (s) => crypto.createHash('sha256').update(s, 'utf8').digest();
   return crypto.timingSafeEqual(hash(given), hash(expected));
+}
+
+// Same token firebase-admin's createCustomToken() makes: an RS256 JWT signed
+// with the service account key. Built by hand because loading
+// firebase-admin/auth crashes on Netlify's function runtime (ERR_REQUIRE_ESM).
+function customToken(uid, claims) {
+  const { clientEmail, privateKey } = serviceAccount();
+  const now = Math.floor(Date.now() / 1000);
+  const part = (obj) => Buffer.from(JSON.stringify(obj)).toString('base64url');
+  const unsigned = `${part({ alg: 'RS256', typ: 'JWT' })}.${part({
+    iss: clientEmail, sub: clientEmail, aud: TOKEN_AUDIENCE, iat: now, exp: now + 3600, uid, claims,
+  })}`;
+  const signature = crypto.sign('RSA-SHA256', Buffer.from(unsigned), privateKey).toString('base64url');
+  return `${unsigned}.${signature}`;
 }
 
 function readPin(event) {
@@ -51,7 +65,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const token = await getAuth(firebaseApp()).createCustomToken('band', { band: true });
+    const token = customToken('band', { band: true });
     return reply(200, { token });
   } catch (err) {
     console.error(`band-login: could not create token: ${err.message}`);
