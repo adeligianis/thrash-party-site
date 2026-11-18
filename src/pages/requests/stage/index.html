@@ -62,10 +62,25 @@ ul.reqs{list-style:none;margin:0;padding:0}
 .time{font-family:var(--label);font-weight:600;font-size:22px;letter-spacing:.04em;color:var(--muted)}
 .who{font-family:var(--label);font-weight:700;font-size:24px;letter-spacing:.03em;color:var(--fg);overflow-wrap:anywhere}
 .badge{font-family:var(--label);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--magenta);border:2px solid var(--magenta);padding:0 8px}
+.badge.tip{color:var(--cyan);border-color:var(--cyan)}
+li.sub{padding:22px 0 6px;border-bottom:1px solid var(--line)}
+.acts.one{grid-template-columns:1fr}
 .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:16px}
 .acts button{font-family:var(--display);font-size:30px;letter-spacing:.04em;border:0;padding:14px 8px;min-height:64px}
 .acts .played{background:var(--cyan);color:var(--bg)}
 .acts .skipped{background:none;border:2px solid var(--muted);color:var(--fg)}
+
+/* Shout-outs: every message fans sent, tips included, newest first */
+.shouts{margin:28px 0 0;border-top:2px solid var(--line)}
+.shouts summary{list-style:none;cursor:pointer;padding:16px 0;font-family:var(--display);font-size:32px;color:var(--magenta)}
+.shouts summary::-webkit-details-marker{display:none}
+.shouts summary::before{content:"+ ";color:var(--cyan)}
+.shouts[open] summary::before{content:"\2212  "}
+.so{border-left:4px solid var(--magenta);padding:4px 0 4px 14px;margin:0 0 18px}
+.so-text{display:block;font-size:28px;line-height:1.25;font-style:italic;overflow-wrap:anywhere;white-space:pre-wrap}
+.so-meta{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;font-family:var(--label);font-weight:600;font-size:20px;letter-spacing:.03em;color:var(--muted)}
+.so-meta .who{font-size:20px}
+.so.played,.so.skipped{opacity:.5}
 
 /* Done list */
 .done{margin:28px 0 48px;border-top:2px solid var(--line)}
@@ -145,6 +160,10 @@ ul.pinned .req .acts{padding-bottom:14px}
     <ul class="reqs pinned" id="pinned" aria-live="polite" aria-label="Free Bird"></ul>
     <ul class="reqs" id="list" aria-live="polite"></ul>
     <p class="msg" id="empty" hidden></p>
+    <details class="shouts" id="shouts" open hidden>
+      <summary id="shoutsSum">Shout-outs</summary>
+      <ul class="reqs" id="shoutList" aria-live="polite"></ul>
+    </details>
     <details class="done" id="done" hidden>
       <summary id="doneSum">Done</summary>
       <ul class="reqs" id="doneList"></ul>
@@ -174,6 +193,7 @@ const db = getFirestore(app);
 
 const $ = (s) => document.querySelector(s);
 const SORT_KEY = "stage-sort";
+const SHOUTS_KEY = "stage-shouts-closed";
 const store = {
   get(k) { try { return localStorage.getItem(k); } catch { return null; } },
   set(k, v) { try { localStorage.setItem(k, v); } catch {} },
@@ -463,7 +483,8 @@ function el(tag, cls, text) {
 
 function songLabel(r) {
   if (r.song) return r.song;
-  return r.kind === "freebird" ? "Free Bird solo" : "No song given";
+  if (r.kind === "freebird") return "Free Bird solo";
+  return r.kind === "tip" ? "Tip" : "No song given";
 }
 
 function body(r) {
@@ -475,6 +496,7 @@ function body(r) {
   if (r.firstName) meta.append(el("span", "who", r.firstName));
   meta.append(el("span", "time", clock(r.createdAt)));
   if (r.kind === "freebird") meta.append(el("span", "badge", "Free Bird"));
+  if (r.kind === "tip" && r.song) meta.append(el("span", "badge tip", "Tip"));
   frag.append(meta);
   return frag;
 }
@@ -487,7 +509,15 @@ function openRow(r) {
   row.append(body(r));
   row.addEventListener("click", () => { openId = openId === r.id ? null : r.id; render(); });
   li.append(row);
-  if (openId === r.id) {
+  if (openId === r.id && r.kind === "tip" && !r.song) {
+    // A plain tip has nothing to play, so one button clears it to Done.
+    const acts = el("div", "acts one");
+    const done = el("button", "played", "Done");
+    done.type = "button";
+    done.addEventListener("click", () => setStatus(r.id, "played"));
+    acts.append(done);
+    li.append(acts);
+  } else if (openId === r.id) {
     const acts = el("div", "acts");
     const played = el("button", "played", "Played");
     const skipped = el("button", "skipped", "Skipped");
@@ -497,6 +527,18 @@ function openRow(r) {
     acts.append(played, skipped);
     li.append(acts);
   }
+  return li;
+}
+
+function shoutRow(r) {
+  const li = el("li", "so");
+  if (r.status === "played" || r.status === "skipped") li.classList.add(r.status);
+  li.append(el("span", "so-text", `“${r.shoutout}”`));
+  const meta = el("span", "so-meta");
+  if (r.firstName) meta.append(el("span", "who", r.firstName));
+  meta.append(el("span", null, r.kind === "tip" ? `${money(r.amountCents || 0)} tip` : `${money(r.amountCents || 0)} · ${songLabel(r)}`));
+  meta.append(el("span", null, clock(r.createdAt)));
+  li.append(meta);
   return li;
 }
 
@@ -518,12 +560,15 @@ const byTime = (a, b) => ms(a.createdAt) - ms(b.createdAt);
 function render() {
   const running = show && !show.endedAt;
   const total = requests.reduce((sum, r) => sum + (r.amountCents || 0), 0);
+  // Song requests and Free Bird count as requests; tips sit under them.
   const listed = requests.filter((r) => r.kind === "request" || r.kind === "freebird");
   const isDone = (r) => r.status === "played" || r.status === "skipped";
-  const pending = listed.filter((r) => !isDone(r));
+  const pending = requests.filter((r) => !isDone(r));
   const pinned = pending.filter((r) => r.kind === "freebird").sort(byTime);
-  const open = pending.filter((r) => r.kind !== "freebird").sort(sortBy === "amount" ? byAmount : byTime);
-  const done = listed.filter(isDone).sort((a, b) => ms(b.statusAt) - ms(a.statusAt));
+  const open = pending.filter((r) => r.kind === "request").sort(sortBy === "amount" ? byAmount : byTime);
+  // Tips always go at the bottom, biggest first, whichever sort is chosen.
+  const tips = pending.filter((r) => r.kind === "tip").sort(byAmount);
+  const done = requests.filter(isDone).sort((a, b) => ms(b.statusAt) - ms(a.statusAt));
 
   $("#total").textContent = money(total);
   $("#count").firstChild.textContent = String(listed.length);
@@ -542,19 +587,28 @@ function render() {
   $("#sortBtn").setAttribute("aria-label", sortBy === "amount" ? "Sorted by amount. Switch to time order" : "Sorted by time. Switch to amount order");
 
   $("#pinned").replaceChildren(...pinned.map(openRow));
-  $("#list").replaceChildren(...open.map(openRow));
+  const tipRows = tips.length ? [el("li", "label sub", `Tips (${tips.length})`), ...tips.map(openRow)] : [];
+  $("#list").replaceChildren(...open.map(openRow), ...tipRows);
 
   const empty = $("#empty");
-  empty.hidden = open.length + pinned.length > 0;
+  empty.hidden = open.length + pinned.length + tips.length > 0;
   empty.textContent = !show ? "Tap Start show when you go on."
-    : listed.length ? "All caught up."
+    : requests.length ? "All caught up."
     : running ? "No requests yet. They’ll appear here live." : "No requests this show.";
+
+  const shouts = requests.filter((r) => r.shoutout).sort((a, b) => ms(b.createdAt) - ms(a.createdAt));
+  $("#shouts").hidden = shouts.length === 0;
+  $("#shoutsSum").textContent = `Shout-outs (${shouts.length})`;
+  $("#shoutList").replaceChildren(...shouts.map(shoutRow));
 
   $("#done").hidden = done.length === 0;
   $("#doneSum").textContent = `Done (${done.length})`;
   $("#doneList").replaceChildren(...done.map(doneRow));
   syncWakeLock();
 }
+
+if (store.get(SHOUTS_KEY) === "1") $("#shouts").open = false;
+$("#shouts").addEventListener("toggle", () => store.set(SHOUTS_KEY, $("#shouts").open ? "0" : "1"));
 
 showScreen("loading");
 </script>
