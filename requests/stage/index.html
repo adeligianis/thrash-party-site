@@ -158,7 +158,7 @@ ul.pinned .req .acts{padding-bottom:14px}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signInWithCustomToken, signOut } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js";
-import { getFirestore, doc, collection, query, where, onSnapshot, writeBatch, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
+import { getFirestore, doc, collection, query, where, onSnapshot, writeBatch, updateDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js";
 
 const app = initializeApp({
   apiKey: "AIzaSyB9fxgNIjZJ81TQZlkzH5yR6_VA9pkDUM8",
@@ -183,7 +183,8 @@ let sortBy = store.get(SORT_KEY) === "time" ? "time" : "amount";
 let show = null;          // { id, startedAt: Date, endedAt: Date|null }
 let requests = [];        // non-refunded requests for the current show
 let openId = null;        // row showing Played / Skipped
-let stopMeta = null, stopShow = null, stopReqs = null;
+let stopMeta = null, stopShow = null, stopReqs = null, stopPub = null;
+let pub;                  // public/status as the server has it; undefined until known
 
 const money = (cents) => "$" + (cents / 100).toFixed(cents % 100 ? 2 : 0);
 const clock = (d) => d ? d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }) : "";
@@ -241,12 +242,14 @@ onAuthStateChanged(auth, async (user) => {
   }
   showScreen("app");
   watchCurrentShow();
+  watchPublicStatus();
 });
 
 // ---------- live data ----------
 function stopAll() {
-  [stopMeta, stopShow, stopReqs].forEach((stop) => stop && stop());
-  stopMeta = stopShow = stopReqs = null;
+  [stopMeta, stopShow, stopReqs, stopPub].forEach((stop) => stop && stop());
+  stopMeta = stopShow = stopReqs = stopPub = null;
+  pub = undefined;
   show = null;
   requests = [];
   stale.clear();
@@ -354,8 +357,31 @@ function watchCurrentShow() {
       show = next;
       if (changed) watchRequests();
       render();
+      syncPublicStatus();
     }, listenError);
   }, listenError);
+}
+
+// public/status is the one document fans can read. The requests page checks
+// it to say whether the band is taking requests. Start/End show write it in
+// the same batch; this also repairs it if it's ever out of step (a show
+// started before it existed, or a write that failed).
+function watchPublicStatus() {
+  const ref = doc(db, "public", "status");
+  stopPub = onSnapshot(ref, { includeMetadataChanges: true }, (s) => {
+    pub = s.metadata.fromCache ? undefined : (s.exists() ? s.data() : null);
+    syncPublicStatus();
+  }, (err) => console.error("public/status", err));   // never sign out over this
+}
+let pubWriting = false;
+function syncPublicStatus() {
+  if (pub === undefined || pubWriting || !show || !show.startedAt || stale.has("show")) return;
+  const live = !show.endedAt;
+  if (pub && pub.live === live && pub.showId === show.id) return;
+  pubWriting = true;
+  setDoc(doc(db, "public", "status"), { live, showId: show.id, at: serverTimestamp() })
+    .catch((err) => console.error("public/status", err))
+    .finally(() => { pubWriting = false; });
 }
 
 function watchRequests() {
@@ -389,12 +415,16 @@ $("#showBtn").addEventListener("click", async () => {
   try {
     if (show && !show.endedAt) {
       if (!confirm("End the show? The list stays up until you start the next one.")) return;
-      await updateDoc(doc(db, "shows", show.id), { endedAt: serverTimestamp() });
+      const batch = writeBatch(db);
+      batch.update(doc(db, "shows", show.id), { endedAt: serverTimestamp() });
+      batch.set(doc(db, "public", "status"), { live: false, showId: show.id, at: serverTimestamp() });
+      await batch.commit();
     } else {
       const ref = doc(collection(db, "shows"));
       const batch = writeBatch(db);
       batch.set(ref, { startedAt: serverTimestamp(), endedAt: null });
       batch.set(doc(db, "meta", "current"), { showId: ref.id });
+      batch.set(doc(db, "public", "status"), { live: true, showId: ref.id, at: serverTimestamp() });
       await batch.commit();
     }
   } catch (err) {

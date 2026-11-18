@@ -118,6 +118,7 @@ label.fld input:focus{border-color:var(--cyan)}
 .done p{margin:0;color:var(--muted);max-width:32ch}
 .ticket{border:1px dashed var(--muted);padding:12px 16px;font-family:var(--label);letter-spacing:.06em;text-transform:uppercase;font-size:14px;width:100%;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;text-align:left}
 .ticket dt{color:var(--muted)} .ticket dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.live.off .dot{background:var(--muted);box-shadow:none;animation:none}
 @media (prefers-reduced-motion:reduce){.dot,.sheet{animation:none}}
 </style>
 </head>
@@ -129,7 +130,7 @@ label.fld input:focus{border-color:var(--cyan)}
     <source srcset="/images/logo.avif" type="image/avif">
     <img src="/images/logo.png" alt="Thrash Party" width="1000" height="444">
   </picture>
-  <div class="live"><span class="dot"></span> <b>Taking requests now</b></div>
+  <div class="live" id="live" role="status" hidden><span class="dot"></span> <b id="liveText"></b></div>
 </header>
 
 <main class="wrap">
@@ -236,6 +237,28 @@ $("#q").addEventListener("input",render);
 document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{sortBy=b.dataset.sort;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));render()}));
 // Relative so it resolves to /songs.json on requests.thrashparty.com and to
 // /requests/songs.json on deploy previews; both land on requests/songs.json.
+// Show status. The band's stage dashboard writes public/status when a show
+// starts or ends; this reads it through Firestore's REST API (no SDK needed)
+// and checks again every minute while the page is open. If it can't be
+// read, the notice stays hidden rather than guess.
+const STATUS_URL="https://firestore.googleapis.com/v1/projects/thrash-party-app/databases/(default)/documents/public/status";
+async function checkLive(){
+  const box=document.getElementById("live");
+  let live;
+  try{
+    const r=await fetch(STATUS_URL,{cache:"no-store"});
+    if(r.status===404)live=false;
+    else if(r.ok)live=(await r.json()).fields?.live?.booleanValue===true;
+    else throw new Error(r.status);
+  }catch{box.hidden=true;return}
+  box.classList.toggle("off",!live);
+  document.getElementById("liveText").textContent=live?"Taking requests now":"Requests open when the show starts";
+  box.hidden=false;
+}
+checkLive();
+setInterval(()=>{if(document.visibilityState==="visible")checkLive()},60000);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")checkLive()});
+
 fetch("songs.json").then(r=>{if(!r.ok)throw new Error(r.status);return r.json()}).then(s=>{SONGS=s;render()}).catch(()=>{
   $("#cnt").textContent="";$("#empty").textContent="Couldn’t load the song list. Refresh to try again.";$("#empty").hidden=false;
 });
