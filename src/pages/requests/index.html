@@ -142,7 +142,7 @@ label.fld input:focus{border-color:var(--cyan)}
     <div class="tier t20"><div class="amt">$20</div><div class="nm">Play next</div><div class="ds">Front of the line</div></div>
   </div>
 
-  <p class="tipline">Just want to tip the band? <a href="https://buy.stripe.com/7sYcMX25S6P0cen1Zm1RC01" target="_blank" rel="noopener">Tip any amount</a></p>
+  <p class="tipline">Just want to tip the band? <a data-pay="tip" target="_blank" rel="noopener">Tip any amount</a></p>
 
   <div class="tools">
     <input id="q" class="search" type="search" placeholder="Search songs or artists" autocomplete="off" aria-label="Search songs or artists">
@@ -162,9 +162,9 @@ label.fld input:focus{border-color:var(--cyan)}
     <div class="kick">You know you want to</div>
     <h2 id="fb">20 seconds of <span>Free Bird</span></h2>
     <p>The solo. Twenty seconds of it. No refunds on this one so you better mean it!</p>
-    <a class="btn" id="fbBtn" target="_blank" rel="noopener" href="https://buy.stripe.com/5kQ4grbGsgpAcen33q1RC05?client_reference_id=free-bird-20-seconds">Make it happen · $100</a>
+    <a class="btn" id="fbBtn" data-pay="freebird" target="_blank" rel="noopener">Make it happen · $100</a>
   </section>
-  <p class="tipline end">No request, just love? <a href="https://buy.stripe.com/7sYcMX25S6P0cen1Zm1RC01" target="_blank" rel="noopener">Tip any amount</a></p>
+  <p class="tipline end">No request, just love? <a data-pay="tip" target="_blank" rel="noopener">Tip any amount</a></p>
 </main>
 
 <footer class="wrap">Tips go to the band. Requests are played in tip order, then by the band's call. Thanks for partying with us.</footer>
@@ -174,7 +174,17 @@ label.fld input:focus{border-color:var(--cyan)}
 
 <script>
 let SONGS=[];
-const LINKS={5:"https://buy.stripe.com/6oUbITfWI2yK0vFavS1RC02",10:"https://buy.stripe.com/5kQ8wH8ug4GS7Y75by1RC03",20:"https://buy.stripe.com/fZu4grbGsb5g2DN9rO1RC04"};
+// Stripe payment links. STRIPE_MODE "test" uses the sandbox links (test cards only);
+// set it to "live" before fans pay for real.
+// Free Bird uses the tip link in the sandbox for now.
+const STRIPE_MODE="test";
+const STRIPE={
+  live:{5:"https://buy.stripe.com/6oUbITfWI2yK0vFavS1RC02",10:"https://buy.stripe.com/5kQ8wH8ug4GS7Y75by1RC03",20:"https://buy.stripe.com/fZu4grbGsb5g2DN9rO1RC04",tip:"https://buy.stripe.com/7sYcMX25S6P0cen1Zm1RC01",freebird:"https://buy.stripe.com/5kQ4grbGsgpAcen33q1RC05"},
+  test:{5:"https://buy.stripe.com/test_14A14feSE4GS3HRavS1RC00",10:"https://buy.stripe.com/test_7sYcMX25S6P0cen1Zm1RC01",20:"https://buy.stripe.com/test_6oUbITfWI2yK0vFavS1RC02",tip:"https://buy.stripe.com/test_fZu4grbGsb5g2DN9rO1RC04",freebird:"https://buy.stripe.com/test_fZu4grbGsb5g2DN9rO1RC04"}
+};
+const LINKS={...STRIPE.live,...STRIPE[STRIPE_MODE]};
+document.querySelectorAll("[data-pay=tip]").forEach(a=>a.href=LINKS.tip);
+document.getElementById("fbBtn").href=LINKS.freebird+"?client_reference_id=free-bird-20-seconds";
 const slug=s=>s.toLowerCase().replace(/&/g,"and").replace(/['’.!?,()]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 const payUrl=(v,i)=>LINKS[v]+"?client_reference_id="+(slug(SONGS[i][0])+"_"+slug(SONGS[i][1])).slice(0,200);
 const TIERS=[{v:5,n:"Request",d:"Goes on the list for tonight",c:"p5"},{v:10,n:"Play soon",d:"Moves up, within the next set",c:"p10"},{v:20,n:"Play next",d:"Front of the line",c:"p20"}];
