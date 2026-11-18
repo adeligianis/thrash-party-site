@@ -47,7 +47,7 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 .count{font-family:var(--display);font-size:40px;line-height:.9;text-align:right}
 .count small{display:block;font-family:var(--label);font-weight:600;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .state{margin:6px 0 10px}
-.state.live{color:var(--magenta)}
+.state .live{color:var(--magenta)}
 .controls{display:grid;grid-template-columns:1fr auto;gap:8px}
 .sort{font-family:var(--label);font-weight:700;font-size:18px;letter-spacing:.06em;text-transform:uppercase;background:none;border:2px solid var(--line);padding:0 14px;min-height:56px}
 
@@ -60,6 +60,7 @@ ul.reqs{list-style:none;margin:0;padding:0}
 .meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-top:8px}
 .amt{font-family:var(--display);font-size:36px;line-height:1;color:var(--cyan)}
 .time{font-family:var(--label);font-weight:600;font-size:22px;letter-spacing:.04em;color:var(--muted)}
+.who{font-family:var(--label);font-weight:700;font-size:24px;letter-spacing:.03em;color:var(--fg);overflow-wrap:anywhere}
 .badge{font-family:var(--label);font-weight:700;font-size:16px;letter-spacing:.1em;text-transform:uppercase;color:var(--magenta);border:2px solid var(--magenta);padding:0 8px}
 .acts{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-bottom:16px}
 .acts button{font-family:var(--display);font-size:30px;letter-spacing:.04em;border:0;padding:14px 8px;min-height:64px}
@@ -80,6 +81,37 @@ ul.reqs{list-style:none;margin:0;padding:0}
 .undo{flex:none;font-family:var(--label);font-weight:700;font-size:18px;letter-spacing:.06em;text-transform:uppercase;background:none;border:2px solid var(--fg);padding:10px 14px;min-height:52px}
 .done .req:focus-within{opacity:1}
 .toast{position:fixed;left:16px;right:16px;bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:20;background:var(--magenta);color:var(--bg);font-weight:600;padding:14px 16px;text-align:center}
+
+/* Connection badge: the list may be stale while this shows */
+.conn{display:inline-block;margin-left:10px;font-family:var(--label);font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:#ffcc00;padding:1px 8px;vertical-align:middle}
+
+/* Free Bird pinned above the list until it's played or skipped */
+ul.pinned .req{border:2px solid var(--magenta);margin:14px 0 4px;padding:0 14px;animation:fbpulse 2.8s ease-in-out infinite}
+ul.pinned .req .acts{padding-bottom:14px}
+@keyframes fbpulse{
+  0%,100%{background:rgba(255,0,255,0);box-shadow:0 0 0 rgba(255,0,255,0)}
+  50%{background:rgba(255,0,255,.2);box-shadow:0 0 28px rgba(255,0,255,.55)}
+}
+
+/* New-request flash. JS shows it for 1.5s; the colour comes from the class. */
+#flash{position:fixed;inset:0;z-index:30;pointer-events:none;opacity:0;--peak:.85;animation:flash 1.5s ease-out forwards}
+#flash.freebird{background:var(--magenta)}
+#flash.request{background:var(--cyan)}
+#flash.tip{background:var(--cyan);--peak:.25}
+@keyframes flash{
+  0%{opacity:0}
+  8%{opacity:var(--peak)}
+  35%{opacity:calc(var(--peak) * .3)}
+  55%{opacity:var(--peak)}
+  100%{opacity:0}
+}
+
+@media (prefers-reduced-motion:reduce){
+  ul.pinned .req{animation:none;background:rgba(255,0,255,.14)}
+  /* A solid bar across the top instead of a full-screen flash */
+  #flash{inset:0 0 auto 0;height:calc(env(safe-area-inset-top,0px) + 18px);opacity:1;animation:none}
+  #flash.tip{height:calc(env(safe-area-inset-top,0px) + 8px)}
+}
 </style>
 </head>
 <body>
@@ -101,7 +133,7 @@ ul.reqs{list-style:none;margin:0;padding:0}
         <div><div class="label">Show total</div><div class="total" id="total">$0</div></div>
         <div class="count" id="count">0<small>requests</small></div>
       </div>
-      <p class="label state" id="state"></p>
+      <p class="label state"><span id="state"></span><span class="conn" id="conn" role="status" hidden>Reconnecting</span></p>
       <div class="controls">
         <button class="big-btn" id="showBtn" type="button">Start show</button>
         <button class="sort" id="sortBtn" type="button"></button>
@@ -110,6 +142,7 @@ ul.reqs{list-style:none;margin:0;padding:0}
   </header>
 
   <main class="wrap">
+    <ul class="reqs pinned" id="pinned" aria-live="polite" aria-label="Free Bird"></ul>
     <ul class="reqs" id="list" aria-live="polite"></ul>
     <p class="msg" id="empty" hidden></p>
     <details class="done" id="done" hidden>
@@ -120,6 +153,7 @@ ul.reqs{list-style:none;margin:0;padding:0}
 </div>
 
 <p class="toast" id="toast" role="alert" hidden></p>
+<div id="flash" aria-hidden="true" hidden></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js";
@@ -168,6 +202,7 @@ function showScreen(name) {
   $("#loading").hidden = name !== "loading";
   $("#login").hidden = name !== "login";
   $("#app").hidden = name !== "app";
+  syncWakeLock();
 }
 
 $("#login").addEventListener("submit", async (e) => {
@@ -214,7 +249,80 @@ function stopAll() {
   stopMeta = stopShow = stopReqs = null;
   show = null;
   requests = [];
+  stale.clear();
+  updateConn();
+  syncWakeLock();
 }
+
+// ---------- connection badge ----------
+// Firestore marks a snapshot fromCache when it can't reach the server, so
+// any listener in that state (or the browser being offline) means the list
+// may be out of date. A short grace period hides the normal blip on load.
+const stale = new Set();
+let connTimer = null;
+function setStale(source, isStale) {
+  if (isStale) stale.add(source); else stale.delete(source);
+  updateConn();
+}
+function updateConn() {
+  const badge = $("#conn");
+  if (navigator.onLine && stale.size === 0) {
+    clearTimeout(connTimer);
+    connTimer = null;
+    badge.hidden = true;
+  } else if (badge.hidden && !connTimer) {
+    connTimer = setTimeout(() => { connTimer = null; badge.hidden = false; }, 2000);
+  }
+}
+window.addEventListener("online", updateConn);
+window.addEventListener("offline", updateConn);
+
+// ---------- arrival flash ----------
+// Strongest wins when several arrive in one snapshot.
+const FLASH_RANK = { tip: 1, request: 2, freebird: 3 };
+function flash(kind) {
+  const f = $("#flash");
+  f.hidden = true;
+  void f.offsetWidth;   // restart the animation if one is already running
+  f.className = kind;
+  f.hidden = false;
+  clearTimeout(flash.timer);
+  flash.timer = setTimeout(() => { f.hidden = true; }, 1500);
+}
+function announce(arrivals) {
+  const kinds = arrivals.map((r) => (r.kind in FLASH_RANK ? r.kind : "request"));
+  if (!kinds.length) return;
+  flash(kinds.reduce((a, b) => (FLASH_RANK[b] > FLASH_RANK[a] ? b : a)));
+}
+
+// ---------- wake lock ----------
+// Held only while a show is running. The browser drops it whenever the page
+// is hidden, so it's requested again when the page comes back.
+let wakeLock = null, wakeBusy = false;
+const wantWakeLock = () => !!(show && show.startedAt && !show.endedAt)
+  && document.visibilityState === "visible" && !$("#app").hidden;
+async function syncWakeLock() {
+  if (!("wakeLock" in navigator)) return;
+  if (!wantWakeLock()) {
+    const lock = wakeLock;
+    wakeLock = null;
+    if (lock) lock.release().catch(() => {});
+    return;
+  }
+  if (wakeLock || wakeBusy) return;
+  wakeBusy = true;
+  try {
+    const lock = await navigator.wakeLock.request("screen");
+    lock.addEventListener("release", () => { if (wakeLock === lock) wakeLock = null; });
+    wakeLock = lock;
+  } catch {
+    // Refused (battery saver, unsupported context). Nothing else to do.
+  } finally {
+    wakeBusy = false;
+  }
+  if (wakeLock && !wantWakeLock()) syncWakeLock();
+}
+document.addEventListener("visibilitychange", syncWakeLock);
 
 const listenError = (err) => {
   console.error(err);
@@ -223,16 +331,20 @@ const listenError = (err) => {
 };
 
 function watchCurrentShow() {
-  stopMeta = onSnapshot(doc(db, "meta", "current"), (snap) => {
+  stopMeta = onSnapshot(doc(db, "meta", "current"), { includeMetadataChanges: true }, (snap) => {
+    setStale("meta", snap.metadata.fromCache);
     const id = snap.exists() ? snap.data().showId : null;
     if (show && show.id === id) return;
     if (stopShow) stopShow();
     if (stopReqs) stopReqs();
     stopShow = stopReqs = null;
+    setStale("show", false);
+    setStale("reqs", false);
     show = null;
     requests = [];
     if (!id) return render();
-    stopShow = onSnapshot(doc(db, "shows", id), (s) => {
+    stopShow = onSnapshot(doc(db, "shows", id), { includeMetadataChanges: true }, (s) => {
+      setStale("show", s.metadata.fromCache);
       if (!s.exists()) return;
       // "estimate" fills in a just-written serverTimestamp with local time
       // until the server confirms it.
@@ -252,7 +364,16 @@ function watchRequests() {
   if (!show || !show.startedAt) return;
   const filters = [where("createdAt", ">=", show.startedAt)];
   if (show.endedAt) filters.push(where("createdAt", "<=", show.endedAt));
-  stopReqs = onSnapshot(query(collection(db, "requests"), ...filters), (snap) => {
+  // The first snapshot that comes from the server is what was already there
+  // when the page loaded (or the show changed); only later additions flash.
+  let primed = false;
+  stopReqs = onSnapshot(query(collection(db, "requests"), ...filters), { includeMetadataChanges: true }, (snap) => {
+    setStale("reqs", snap.metadata.fromCache);
+    if (primed) {
+      announce(snap.docChanges().filter((c) => c.type === "added").map((c) => c.doc.data()).filter((r) => !r.refunded));
+    } else if (!snap.metadata.fromCache) {
+      primed = true;
+    }
     requests = snap.docs
       .map((d) => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) }))
       .filter((r) => !r.refunded)
@@ -320,7 +441,9 @@ function body(r) {
   frag.append(el("span", "song", songLabel(r)));
   if (r.shoutout) frag.append(el("span", "shout", `“${r.shoutout}”`));
   const meta = el("span", "meta");
-  meta.append(el("span", "amt", money(r.amountCents || 0)), el("span", "time", clock(r.createdAt)));
+  meta.append(el("span", "amt", money(r.amountCents || 0)));
+  if (r.firstName) meta.append(el("span", "who", r.firstName));
+  meta.append(el("span", "time", clock(r.createdAt)));
   if (r.kind === "freebird") meta.append(el("span", "badge", "Free Bird"));
   frag.append(meta);
   return frag;
@@ -367,7 +490,9 @@ function render() {
   const total = requests.reduce((sum, r) => sum + (r.amountCents || 0), 0);
   const listed = requests.filter((r) => r.kind === "request" || r.kind === "freebird");
   const isDone = (r) => r.status === "played" || r.status === "skipped";
-  const open = listed.filter((r) => !isDone(r)).sort(sortBy === "amount" ? byAmount : byTime);
+  const pending = listed.filter((r) => !isDone(r));
+  const pinned = pending.filter((r) => r.kind === "freebird").sort(byTime);
+  const open = pending.filter((r) => r.kind !== "freebird").sort(sortBy === "amount" ? byAmount : byTime);
   const done = listed.filter(isDone).sort((a, b) => ms(b.statusAt) - ms(a.statusAt));
 
   $("#total").textContent = money(total);
@@ -386,10 +511,11 @@ function render() {
   $("#sortBtn").textContent = sortBy === "amount" ? "Sort: $ high" : "Sort: Oldest";
   $("#sortBtn").setAttribute("aria-label", sortBy === "amount" ? "Sorted by amount. Switch to time order" : "Sorted by time. Switch to amount order");
 
+  $("#pinned").replaceChildren(...pinned.map(openRow));
   $("#list").replaceChildren(...open.map(openRow));
 
   const empty = $("#empty");
-  empty.hidden = open.length > 0;
+  empty.hidden = open.length + pinned.length > 0;
   empty.textContent = !show ? "Tap Start show when you go on."
     : listed.length ? "All caught up."
     : running ? "No requests yet. They’ll appear here live." : "No requests this show.";
@@ -397,16 +523,8 @@ function render() {
   $("#done").hidden = done.length === 0;
   $("#doneSum").textContent = `Done (${done.length})`;
   $("#doneList").replaceChildren(...done.map(doneRow));
+  syncWakeLock();
 }
-
-// Keep the screen awake on the mic stand while signed in, where supported.
-let wakeLock = null;
-async function keepAwake() {
-  if (!("wakeLock" in navigator) || document.visibilityState !== "visible" || $("#app").hidden) return;
-  try { wakeLock = await navigator.wakeLock.request("screen"); } catch {}
-}
-document.addEventListener("visibilitychange", keepAwake);
-new MutationObserver(keepAwake).observe($("#app"), { attributes: true, attributeFilter: ["hidden"] });
 
 showScreen("loading");
 </script>

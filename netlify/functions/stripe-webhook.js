@@ -35,6 +35,16 @@ function customField(session, key) {
   return trimmed || null;
 }
 
+// Only the first word of the name Checkout collected (name on card, or from
+// Apple Pay / Google Pay), so the stage screen can say who asked. Card names
+// often arrive in capitals, so those are tidied to "Sam".
+function firstName(session) {
+  const word = String(session.customer_details?.name || '').trim().split(/\s+/)[0] || '';
+  if (!word) return null;
+  const tidy = word === word.toUpperCase() ? word[0] + word.slice(1).toLowerCase() : word;
+  return tidy.slice(0, 30);
+}
+
 function kindOf(session) {
   const link = session.payment_link;
   if (link && link === process.env.STRIPE_TIP_LINK_ID) return 'tip';
@@ -42,8 +52,10 @@ function kindOf(session) {
   return 'request';
 }
 
-async function recordCheckout(session) {
-  if (session.payment_status !== 'paid') return;
+// Returns a short note for the response body, which Stripe shows on the
+// event's delivery page.
+async function recordCheckout(session, paidAt) {
+  if (session.payment_status !== 'paid') return `skipped: payment_status is ${session.payment_status}`;
 
   const songTyped = customField(session, SONG_FIELD_KEY);
   const songTapped = session.client_reference_id || null;
@@ -53,10 +65,13 @@ async function recordCheckout(session) {
 
   const request = {
     amountCents: session.amount_total,
-    createdAt: Timestamp.fromMillis(session.created * 1000),
+    // When the payment went through, not when checkout was opened, so a fan
+    // who opened checkout before the show started still lands in that show.
+    createdAt: Timestamp.fromMillis(paidAt * 1000),
     paymentIntentId,
     songTyped,
     shoutout: customField(session, SHOUTOUT_FIELD_KEY),
+    firstName: firstName(session),
     songTapped,
     song: songTyped || (songTapped && SONG_BY_REF.get(songTapped)) || null,
     kind: kindOf(session),
@@ -70,7 +85,9 @@ async function recordCheckout(session) {
     await firestore().collection('requests').doc(session.id).create(request);
   } catch (err) {
     if (err.code !== ALREADY_EXISTS) throw err;
+    return `already saved: ${session.id}`;
   }
+  return `saved ${request.kind} ${request.amountCents}c as requests/${session.id}`;
 }
 
 async function recordRefund(charge) {
@@ -107,12 +124,14 @@ exports.handler = async (event) => {
     return reply(400, 'Invalid signature');
   }
 
+  let note = `ignored: ${stripeEvent.type}`;
   try {
     if (stripeEvent.type === 'checkout.session.completed') {
-      await recordCheckout(stripeEvent.data.object);
+      note = await recordCheckout(stripeEvent.data.object, stripeEvent.created ?? stripeEvent.data.object.created);
     } else if (stripeEvent.type === 'charge.refunded') {
       const found = await recordRefund(stripeEvent.data.object);
       if (!found) console.warn(`stripe-webhook: ${stripeEvent.id} refund matches no saved request`);
+      note = found ? 'marked refunded' : 'refund matches no saved request';
     }
   } catch (err) {
     // Only the event id and error, never customer details. A non-2xx makes
@@ -121,5 +140,6 @@ exports.handler = async (event) => {
     return reply(500, 'Error');
   }
 
-  return reply(200, 'ok');
+  console.log(`stripe-webhook: ${stripeEvent.id} ${note}`);
+  return reply(200, note);
 };
